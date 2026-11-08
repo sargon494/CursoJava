@@ -94,16 +94,14 @@ public class MediaTres {
 public class Iniciales {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nombre y apellidos (separados por espacios): ");
-        String completo = sc.nextLine().trim();
-        String[] partes = completo.split(" ");   // si hay varios espacios seguidos, sobrarían cadenas vacías
-        StringBuilder iniciales = new StringBuilder();
-        for (String parte : partes) {
-            if (!parte.isEmpty()) {
-                iniciales.append(parte.charAt(0)).append(".");
-            }
-        }
-        System.out.println("Iniciales: " + iniciales);
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+        System.out.print("Primer apellido: ");
+        String apellido1 = sc.nextLine();
+        System.out.print("Segundo apellido: ");
+        String apellido2 = sc.nextLine();
+        // Cogemos el primer carácter de cada cadena
+        System.out.println("Iniciales: " + nombre.charAt(0) + "." + apellido1.charAt(0) + "." + apellido2.charAt(0) + ".");
         sc.close();
     }
 }`
