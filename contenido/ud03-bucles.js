@@ -52,6 +52,311 @@ window.CONTENIDO["bucles"] = {
     }
   ],
 
+  soluciones: [
+    `import java.util.Scanner;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("n (0-20): ");
+        int n = sc.nextInt();
+        if (n < 0 || n > 20) {
+            System.out.println("Introduce un valor entre 0 y 20.");
+        } else {
+            long factorial = 1;
+            for (int i = 2; i <= n; i++) {
+                factorial *= i;
+            }
+            System.out.println(n + "! = " + factorial);
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class SumaMediaHastaCero {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int suma = 0;
+        int cantidad = 0;
+        System.out.print("Número (0 para terminar): ");
+        int numero = sc.nextInt();
+        while (numero != 0) {
+            suma += numero;
+            cantidad++;
+            System.out.print("Número (0 para terminar): ");
+            numero = sc.nextInt();
+        }
+        if (cantidad == 0) {
+            System.out.println("No se introdujeron números.");
+        } else {
+            System.out.println("Suma: " + suma);
+            System.out.println("Media: " + (suma / (double) cantidad));
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Random;
+import java.util.Scanner;
+
+public class AdivinaNumero {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int secreto = new Random().nextInt(100) + 1;
+        boolean acertado = false;
+        for (int intento = 1; intento <= 10 && !acertado; intento++) {
+            System.out.print("Intento " + intento + "/10: ");
+            int numero = sc.nextInt();
+            if (numero == secreto) {
+                acertado = true;
+                System.out.println("¡Acertaste!");
+            } else if (numero < secreto) {
+                System.out.println("El número es mayor.");
+            } else {
+                System.out.println("El número es menor.");
+            }
+        }
+        if (!acertado) System.out.println("El número era " + secreto + ".");
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class ContarSignos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Cantidad de números: ");
+        int n = sc.nextInt();
+        if (n < 0) {
+            System.out.println("La cantidad no puede ser negativa.");
+        } else {
+            int positivos = 0, negativos = 0, ceros = 0;
+            for (int i = 0; i < n; i++) {
+                int numero = sc.nextInt();
+                if (numero > 0) positivos++;
+                else if (numero < 0) negativos++;
+                else ceros++;
+            }
+            System.out.println("Positivos: " + positivos);
+            System.out.println("Negativos: " + negativos);
+            System.out.println("Ceros: " + ceros);
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class ComprobarVocales {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Escribe caracteres y termina con un espacio: ");
+        String texto = sc.nextLine();
+        for (int i = 0; i < texto.length() && !Character.isWhitespace(texto.charAt(i)); i++) {
+            char letra = Character.toLowerCase(texto.charAt(i));
+            boolean vocal = "aeiouáéíóú".indexOf(letra) >= 0;
+            System.out.println(texto.charAt(i) + (vocal ? " es vocal" : " no es vocal"));
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class ParesIntervalo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Primer extremo: ");
+        int a = sc.nextInt();
+        System.out.print("Segundo extremo: ");
+        int b = sc.nextInt();
+        int inicio = Math.min(a, b);
+        int fin = Math.max(a, b);
+        for (int n = inicio; n <= fin; n++) {
+            if (n % 2 == 0) System.out.println(n);
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class TablaMultiplicar {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Número: ");
+        int n = sc.nextInt();
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(n + " x " + i + " = " + (n * i));
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class EstadisticasIntervalo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Límite inferior: ");
+        int inferior = sc.nextInt();
+        System.out.print("Límite superior: ");
+        int superior = sc.nextInt();
+        int inicio = Math.min(inferior, superior);
+        int fin = Math.max(inferior, superior);
+        int sumaDentro = 0, cantidadFuera = 0;
+        System.out.print("Valor (0 para terminar): ");
+        int valor = sc.nextInt();
+        while (valor != 0) {
+            if (valor >= inicio && valor <= fin) sumaDentro += valor;
+            else cantidadFuera++;
+            System.out.print("Valor (0 para terminar): ");
+            valor = sc.nextInt();
+        }
+        System.out.println("Suma dentro: " + sumaDentro);
+        System.out.println("Cantidad fuera: " + cantidadFuera);
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class NumeroPrimo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Número: ");
+        int n = sc.nextInt();
+        boolean primo = n >= 2;
+        for (int divisor = 2; primo && divisor <= n / divisor; divisor++) {
+            if (n % divisor == 0) primo = false;
+        }
+        System.out.println(n + (primo ? " es primo" : " no es primo"));
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class MediaN {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Cantidad de valores: ");
+        int n = sc.nextInt();
+        if (n <= 0) {
+            System.out.println("La cantidad debe ser positiva.");
+        } else {
+            double suma = 0;
+            for (int i = 0; i < n; i++) suma += sc.nextDouble();
+            System.out.println("Media: " + (suma / n));
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class ContarDigitos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Número entero: ");
+        long n = sc.nextLong();
+        n = Math.abs(n);
+        int digitos = 1;
+        while (n >= 10) {
+            n /= 10;
+            digitos++;
+        }
+        System.out.println("Cifras: " + digitos);
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class MCD {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Dos enteros: ");
+        long a = Math.abs(sc.nextLong());
+        long b = Math.abs(sc.nextLong());
+        if (a == 0 && b == 0) {
+            System.out.println("El MCD de 0 y 0 no está definido.");
+        } else {
+            while (b != 0) {
+                long resto = a % b;
+                a = b;
+                b = resto;
+            }
+            System.out.println("MCD: " + a);
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class TrianguloAsteriscos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Filas: ");
+        int filas = sc.nextInt();
+        if (filas <= 0) {
+            System.out.println("Las filas deben ser positivas.");
+        } else {
+            for (int fila = 1; fila <= filas; fila++) {
+                for (int columna = 1; columna <= fila; columna++) {
+                    System.out.print("*");
+                }
+                System.out.println();
+            }
+        }
+        sc.close();
+    }
+}`,
+    `public class TablasAnidadas {
+    public static void main(String[] args) {
+        for (int tabla = 1; tabla <= 10; tabla++) {
+            System.out.println("Tabla del " + tabla);
+            for (int factor = 1; factor <= 10; factor++) {
+                System.out.println(tabla + " x " + factor + " = " + (tabla * factor));
+            }
+        }
+    }
+}`,
+    `import java.util.Scanner;
+
+public class PiramideNumeros {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Filas: ");
+        int filas = sc.nextInt();
+        if (filas <= 0) {
+            System.out.println("Las filas deben ser positivas.");
+        } else {
+            for (int fila = 1; fila <= filas; fila++) {
+                for (int digito = 1; digito <= fila; digito++) {
+                    System.out.print(digito);
+                }
+                System.out.println();
+            }
+        }
+        sc.close();
+    }
+}`,
+    `import java.util.Scanner;
+
+public class RectanguloAsteriscos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Altura y anchura: ");
+        int altura = sc.nextInt();
+        int anchura = sc.nextInt();
+        if (altura <= 0 || anchura <= 0) {
+            System.out.println("Las dimensiones deben ser positivas.");
+        } else {
+            for (int fila = 0; fila < altura; fila++) {
+                for (int columna = 0; columna < anchura; columna++) {
+                    System.out.print("*");
+                }
+                System.out.println();
+            }
+        }
+        sc.close();
+    }
+}`
+  ],
+
   explicacion: [
     {
       titulo: "1. Repetir instrucciones es una decisión de diseño",
@@ -213,3 +518,13 @@ while (i < n) {
     }
   ]
 };
+
+const ejerciciosBucles = window.CONTENIDO["bucles"].ejercicios;
+const solucionesBucles = window.CONTENIDO["bucles"].soluciones;
+if (ejerciciosBucles.length !== solucionesBucles.length) {
+  throw new Error("Cada ejercicio de bucles debe tener su solución.");
+}
+ejerciciosBucles.forEach((ejercicio, indice) => {
+  ejercicio.solucion = solucionesBucles[indice];
+});
+delete window.CONTENIDO["bucles"].soluciones;

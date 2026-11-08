@@ -206,7 +206,14 @@
     const ejercicios = (u.ejercicios || []).length
       ? `<h2>Ejercicios</h2>
          <ol class="ejercicios">${u.ejercicios.map((e, i) =>
-           bloqueEjercicio(`ej-${u.id}`, i, e.titulo, e.texto, ejUd(u) + i, extra[i])
+           bloqueEjercicio(
+             `ej-${u.id}`,
+             i,
+             e.titulo,
+             e.texto,
+             ejUd(u) + i,
+             extra[i]
+           )
          ).join("")}</ol>`
       : `<h2>Ejercicios</h2><p>Esta unidad no tiene ejercicios propios en el temario; practica con los de la unidad 12 y los exámenes.</p>`;
     const pie = `<nav class="nav-unidad" aria-label="Unidades">
