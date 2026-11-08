@@ -178,3 +178,84 @@ code { font-family: var(--mono); font-size: .9em; }
 .quiz-op.mal { border-color: var(--acento); background: var(--acento-suave); }
 .retro { margin-top: .7rem; font-size: .95rem; color: var(--tinta-suave); }
 .retro strong { color: var(--tinta); }
+
+/* Recorrido de aprendizaje */
+.principal { max-width: 1120px; }
+.hero-curso {
+  display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 2rem; align-items: end;
+  padding: clamp(1.5rem, 4vw, 3rem); margin: .2rem 0 2.4rem; border: 1px solid var(--linea);
+  border-radius: 16px; background: var(--papel-2); box-shadow: 0 12px 32px rgb(34 32 28 / 5%);
+}
+.hero-contenido { max-width: 700px; }
+.hero-curso h1 { max-width: 650px; font-size: clamp(2.4rem, 5vw, 4.1rem); letter-spacing: -.035em; }
+.hero-curso .subtitulo { max-width: 620px; margin: .8rem 0 1.4rem; }
+.boton-principal {
+  display: inline-flex; gap: .75rem; align-items: center; padding: .8rem 1.05rem; border-radius: 8px;
+  background: var(--acento); color: #fff; font-weight: 600; text-decoration: none;
+  transition: transform 150ms ease-out, background-color 150ms ease-out;
+}
+.boton-principal:hover { background: color-mix(in srgb, var(--acento) 82%, #000); }
+.boton-principal:active, .boton:active { transform: scale(.98); }
+.hero-datos { display: grid; gap: .7rem; }
+.hero-datos div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-bottom: .55rem; border-bottom: 1px solid var(--linea); }
+.hero-datos strong { font-family: var(--serif); font-size: 1.8rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.hero-datos span { color: var(--tinta-suave); font-size: .9rem; }
+.seccion-cabecera { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.seccion-cabecera h2 { margin: 0; }
+.seccion-cabecera > span { color: var(--tinta-suave); font-size: .9rem; font-variant-numeric: tabular-nums; }
+.progreso-global { margin: 0 0 2.2rem; }
+.progreso-global .barra-fondo { margin-top: .65rem; }
+.guia-estudio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin: 2.5rem 0 3rem; }
+.guia-estudio > div { padding: 1rem 1.1rem; border-top: 2px solid var(--linea); }
+.guia-estudio .paso { color: var(--acento); font-family: var(--mono); font-size: .78rem; }
+.guia-estudio h3 { margin: .55rem 0 .3rem; font-size: 1.05rem; }
+.guia-estudio p { margin: 0; color: var(--tinta-suave); font-size: .92rem; }
+.unidades-cabecera { margin: 0 0 1rem; align-items: end; }
+.unidades-cabecera h2 { margin-top: .15rem; }
+.unidades-cabecera > a { text-decoration: none; font-weight: 600; }
+.tarjetas { grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); }
+.tarjeta { transition: transform 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out; }
+.tarjeta .etiqueta { margin: 0; }
+.tarjeta .mini-barra { margin-top: .8rem; }
+.nota-practica {
+  display: grid; gap: .2rem; margin: 1.4rem 0 2rem; padding: .9rem 1rem;
+  border-left: 3px solid var(--acento); background: var(--papel-2); border-radius: 0 8px 8px 0;
+  font-size: .94rem;
+}
+.nota-practica span { color: var(--tinta-suave); }
+.apartado { padding: 0 0 1.2rem; border-bottom: 1px solid var(--linea); }
+.apartado:last-child { border-bottom: 0; }
+.apartado h3 { margin-top: .25rem; }
+.bloque-quiz { margin-top: 2.4rem; }
+.bloque-quiz > .subtitulo { margin: .45rem 0 1rem; font-size: 1rem; }
+.pregunta { padding: 1rem 1.1rem; }
+.quiz-op { transition: border-color 140ms ease-out, background-color 140ms ease-out; }
+.quiz-op:active:not(:disabled) { transform: scale(.99); }
+.resultado-quiz { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: .4rem; }
+.resultado-quiz .progreso-texto { margin: 0; }
+.quiz-reset { transition: transform 150ms ease-out, background-color 150ms ease-out; }
+.aviso-progreso {
+  margin: 0 0 1rem; padding: .7rem .9rem; border: 1px solid var(--acento);
+  border-radius: 8px; background: var(--acento-suave); color: var(--tinta); font-size: .92rem;
+}
+.aviso-progreso[hidden] { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .tarjeta:hover { transform: translateY(-2px); border-color: var(--acento); box-shadow: 0 8px 20px rgb(34 32 28 / 7%); }
+}
+
+@media (max-width: 800px) {
+  .hero-curso { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero-datos { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+  .hero-datos div { display: grid; justify-content: start; gap: .2rem; }
+  .guia-estudio { grid-template-columns: 1fr; gap: .2rem; }
+  .guia-estudio > div { padding: .8rem 0; }
+}
+
+@media (max-width: 480px) {
+  .hero-curso { padding: 1.25rem; margin-top: 0; }
+  .hero-curso h1 { font-size: 2.35rem; }
+  .hero-datos strong { font-size: 1.55rem; }
+  .seccion-cabecera { align-items: start; }
+  .resultado-quiz { align-items: start; flex-direction: column; }
+}

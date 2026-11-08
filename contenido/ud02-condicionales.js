@@ -334,5 +334,153 @@ public class EnvioInternacional {
     }
 }`
     }
+  ],
+
+  explicacion: [
+    {
+      titulo: "1. Una condición es una pregunta que produce true o false",
+      parrafos: [
+        "Una estructura condicional permite que el programa tome una decisión. La expresión entre paréntesis debe producir un boolean: true para ejecutar el bloque y false para saltarlo. No se convierte automáticamente un número en una condición como ocurre en otros lenguajes.",
+        "Los operadores relacionales comparan valores: ==, !=, <, >, <= y >=. En Java, == compara números primitivos por valor, pero en objetos compara referencias; para saber si dos textos tienen el mismo contenido se usa equals().",
+        "Usar llaves incluso cuando solo hay una instrucción hace visible qué pertenece a cada rama y evita que una modificación posterior cambie accidentalmente el flujo."
+      ],
+      codigo: `int nota = 7;
+if (nota >= 5) {
+    System.out.println("Aprobado");
+} else {
+    System.out.println("Suspenso");
+}`
+    },
+    {
+      titulo: "2. Encadenar condiciones sin dejar huecos",
+      parrafos: [
+        "En una cadena if / else if / else se evalúan las condiciones en orden. Cuando una es verdadera, se ejecuta su bloque y se omiten todas las ramas posteriores. Por eso el orden importa: las condiciones más específicas o los límites superiores deben colocarse antes que una condición general que las incluya.",
+        "Para convertir una nota en una calificación, por ejemplo, comprobar primero nota >= 5 clasificaría como aprobado también a quienes deberían recibir notable o sobresaliente. Ordenar de mayor a menor evita ese solapamiento.",
+        "Comprueba siempre los valores de frontera: justo por debajo del límite, exactamente en el límite y justo por encima. Esa pequeña tabla detecta errores de < frente a <= antes de escribir muchos casos."
+      ],
+      codigo: `if (nota < 0 || nota > 10) {
+    System.out.println("Nota no válida");
+} else if (nota >= 9) {
+    System.out.println("Sobresaliente");
+} else if (nota >= 7) {
+    System.out.println("Notable");
+} else if (nota >= 5) {
+    System.out.println("Aprobado");
+} else {
+    System.out.println("Suspenso");
+}`
+    },
+    {
+      titulo: "3. Combinar reglas con &&, || y !",
+      parrafos: [
+        "&& significa «y»: las dos condiciones deben ser verdaderas. || significa «o»: basta con que una lo sea. ! invierte el resultado. Los paréntesis ayudan a expresar la regla tal como la leerías en voz alta y reducen errores de precedencia.",
+        "&& y || usan cortocircuito. En A && B, si A es false, B no se evalúa; en A || B, si A es true, B no se evalúa. Esto permite proteger una operación: primero comprobar que el divisor no sea cero y después dividir.",
+        "No confundas el operador lógico && con el operador &. En condiciones, && suele ser el correcto porque evita evaluar la segunda parte cuando ya se conoce el resultado."
+      ],
+      codigo: `if (divisor != 0 && dividendo / divisor > 2) {
+    System.out.println("El cociente supera 2");
+}
+
+if (edad >= 18 && tieneEntrada) {
+    System.out.println("Puede entrar");
+}`
+    },
+    {
+      titulo: "4. Elegir entre if y switch",
+      parrafos: [
+        "if es adecuado para rangos, combinaciones y reglas que dependen de varias variables. switch resulta claro cuando una expresión se compara con una lista discreta de valores, como un número de menú o un día de la semana.",
+        "En el switch tradicional, break impide continuar ejecutando el siguiente case. Si se omite, hay caída al siguiente caso (fall-through), a veces intencionada, pero normalmente accidental. Incluye default para tratar una opción no reconocida.",
+        "Las versiones modernas de Java también tienen switch expressions con flechas (case 1 -> ...), que no caen al caso siguiente y pueden devolver un valor. En un curso inicial conviene reconocer ambas formas y comprobar qué versión de Java usa el proyecto en Eclipse."
+      ],
+      codigo: `String tipo;
+switch (opcion) {
+    case 1:
+        tipo = "Pequeño";
+        break;
+    case 2:
+        tipo = "Mediano";
+        break;
+    case 3:
+        tipo = "Grande";
+        break;
+    default:
+        tipo = "Opción no válida";
+}
+System.out.println(tipo);`
+    },
+    {
+      titulo: "5. Strings y condiciones",
+      parrafos: [
+        "Dos String pueden contener las mismas letras y ser objetos distintos. Por eso usuario == \"ana\" no es una comparación fiable de contenido. Escribe usuario.equals(\"ana\") o, para ignorar mayúsculas, usuario.equalsIgnoreCase(\"ana\").",
+        "Si la referencia pudiera ser null, llamar usuario.equals(...) produciría NullPointerException. En una comparación con un literal es seguro poner el literal delante: \"ana\".equals(usuario).",
+        "Las comparaciones de Strings distinguen mayúsculas por defecto. Si una regla no debe distinguirlas, deja esa decisión explícita en el código con equalsIgnoreCase en vez de cambiar el texto de forma accidental."
+      ],
+      codigo: `String usuario = "Ana";
+if ("ana".equalsIgnoreCase(usuario)) {
+    System.out.println("Usuario reconocido");
+}`
+    },
+    {
+      titulo: "6. El operador ternario: solo para elegir un valor",
+      parrafos: [
+        "La expresión condición ? valorSiVerdadero : valorSiFalso elige uno de dos valores y puede asignarse a una variable o formar parte de otra expresión. Es útil para una decisión pequeña, como seleccionar una etiqueta.",
+        "No sustituye a cualquier if. Si cada rama ejecuta varias acciones, anidar ternarios o meter lógica compleja dentro de una línea empeora la lectura. Elige la forma que haga evidente la regla, no la que use menos líneas."
+      ],
+      codigo: `String estado = (nota >= 5) ? "Aprobado" : "Suspenso";
+System.out.println(estado);`
+    },
+    {
+      titulo: "7. Errores típicos y cómo depurarlos",
+      parrafos: [
+        "Usar = en vez de ==: = asigna; == compara. Para un String, incluso == puede compilar y fallar solo con ciertos datos, así que usa equals().",
+        "Ordenar mal rangos o usar límites inclusivos de forma incoherente produce errores en las fronteras. Anota entradas de prueba como 4.99, 5 y 5.01, y decide qué resultado espera cada una.",
+        "Olvidar llaves o break, invertir una condición con !, y escribir x > 0 || x < 10 cuando se quería expresar que x está entre 0 y 10. Esa última condición es siempre verdadera para cualquier número; el rango correcto usa &&.",
+        "En Eclipse, coloca un breakpoint en la primera condición y ejecuta con Debug. Inspecciona el valor de cada variable, avanza con Step Over y compara el camino real con la tabla de casos que diseñaste."
+      ],
+      codigo: `// Incorrecto: cualquier número cumple una de las dos partes.
+if (nota < 0 || nota > 10) { }
+
+// Correcto: nota está dentro del intervalo.
+if (nota >= 0 && nota <= 10) { }`
+    }
+  ],
+
+  quiz: [
+    {
+      pregunta: "Con int nota = 8, ¿qué imprime este código?\nif (nota >= 5) { System.out.println(\"Aprobado\"); } else { System.out.println(\"Suspenso\"); }",
+      opciones: ["Suspenso", "Aprobado", "No imprime nada", "Error de compilación"],
+      correcta: 1,
+      explicacion: "8 >= 5 es true, así que se ejecuta la primera rama y se omite el else."
+    },
+    {
+      pregunta: "¿Qué operador expresa que edad está entre 18 y 65, incluidos ambos límites?",
+      opciones: ["edad >= 18 || edad <= 65", "edad > 18 && edad < 65", "edad >= 18 && edad <= 65", "edad == 18 && edad == 65"],
+      correcta: 2,
+      explicacion: "Un valor debe cumplir simultáneamente el límite inferior y el superior; por eso se usa && y >= / <= incluyen los extremos."
+    },
+    {
+      pregunta: "¿Qué hay que usar para comparar el contenido de dos String?",
+      opciones: ["a == b", "a.equals(b)", "a = b", "a.compare(b)"],
+      correcta: 1,
+      explicacion: "equals compara el contenido. == comprueba si ambas variables apuntan al mismo objeto; = asigna."
+    },
+    {
+      pregunta: "En un switch tradicional, ¿qué puede ocurrir si se omite break?",
+      opciones: ["El programa termina", "Se ejecuta también el siguiente case", "Se ejecuta default siempre", "No compila en ninguna versión de Java"],
+      correcta: 1,
+      explicacion: "Sin break, la ejecución continúa en el siguiente case aunque su etiqueta no coincida: se llama fall-through."
+    },
+    {
+      pregunta: "¿Qué representa la condición x < 0 || x > 10?",
+      opciones: ["Que x está dentro del rango de 0 a 10", "Que x está fuera del rango de 0 a 10", "Que x vale exactamente 0 o 10", "Que x siempre es mayor que 10"],
+      correcta: 1,
+      explicacion: "La expresión es correcta si el objetivo es detectar valores inválidos: es true cuando x está por debajo de 0 o por encima de 10. Para validar que está dentro, se usa x >= 0 && x <= 10."
+    },
+    {
+      pregunta: "¿Cuál es una buena situación para usar el operador ternario?",
+      opciones: ["Ejecutar cinco acciones diferentes", "Reemplazar un switch grande", "Elegir entre dos etiquetas sencillas para asignar a una variable", "Crear una condición con tres niveles anidados"],
+      correcta: 2,
+      explicacion: "El ternario funciona bien para elegir un valor entre dos opciones simples. Para lógica extensa, if/else resulta más claro."
+    }
   ]
 };
