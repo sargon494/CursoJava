@@ -349,7 +349,16 @@ window.TEMARIO = {
       codigo: [
         `public class Comparador<T extends Comparable<T>> {\n    private T a, b;\n    public Comparador(T a, T b) { this.a = a; this.b = b; }\n    public T mayor() { return a.compareTo(b) > 0 ? a : b; }\n}`
       ],
-      ejercicios: []
+      ejercicios: [
+        { titulo: "Caja genérica", texto: "Implementar una caja con put, get, vaciar y control de valor ausente." },
+        { titulo: "Par clave-valor", texto: "Implementar Par<K,V> con acceso, igualdad y hashCode." },
+        { titulo: "Buscar elemento genérico", texto: "Método genérico que devuelve el índice de la primera coincidencia o -1." },
+        { titulo: "Estadísticas numéricas", texto: "Clase con límite T extends Number que calcula suma y media." },
+        { titulo: "Comparador genérico", texto: "Clase T extends Comparable<T> que devuelve el menor, el mayor y el orden." },
+        { titulo: "Pila enlazada genérica", texto: "Implementar push, pop, peek, isEmpty y size con nodos T." },
+        { titulo: "Invertir un array genérico", texto: "Método genérico que produce una copia invertida sin modificar el original." },
+        { titulo: "Copiar entre tipos relacionados", texto: "Método con comodines extends y super para copiar elementos de una colección a otra." }
+      ]
     },
     {
       id: "colecciones",
