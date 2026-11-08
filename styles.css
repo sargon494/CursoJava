@@ -147,10 +147,12 @@ code { font-family: var(--mono); font-size: .9em; }
 .solucion pre { margin: .6rem 0 0; font-size: .82rem; }
 
 @media (max-width: 800px) {
-  .layout { grid-template-columns: 1fr; }
-  .barra { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--linea); }
-  #menu { display: flex; flex-wrap: wrap; gap: .2rem; }
-  #menu a { margin: 0; }
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .barra { position: static; height: auto; min-width: 0; border-right: none; border-bottom: 1px solid var(--linea); }
+  #menu { display: flex; flex-wrap: wrap; gap: .2rem; min-width: 0; }
+  #menu a { flex: 1 1 200px; min-width: 0; margin: 0; overflow-wrap: anywhere; }
+  .marca, .extras, .principal { min-width: 0; }
+  .extras a { min-width: 0; overflow-wrap: anywhere; }
   .principal { padding: 1.6rem 1.1rem; }
 }
 
