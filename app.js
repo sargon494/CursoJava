@@ -102,13 +102,38 @@
       <div class="tarjetas">${tarjetas}</div>`;
   }
 
+  // Autoevaluación: cada pregunta se responde una vez y muestra la corrección al momento.
+  function renderQuiz(uid, preguntas) {
+    const items = preguntas.map((q, i) => `
+      <li class="pregunta" data-correcta="${q.correcta}">
+        <div class="enunciado-q">${i + 1}. ${esc(q.pregunta)}</div>
+        <div class="opciones">${q.opciones.map((o, j) =>
+          `<button type="button" class="quiz-op" data-o="${j}">${esc(o)}</button>`).join("")}</div>
+        <div class="retro" hidden>${esc(q.explicacion)}</div>
+      </li>`).join("");
+    return `
+      <h2>Autoevaluación</h2>
+      <p class="subtitulo">Elige una respuesta en cada pregunta. La corrección aparece al momento.</p>
+      <ol class="quiz" data-quiz="${esc(uid)}">${items}</ol>
+      <p class="progreso-texto" data-marcador>Respondidas: 0 de ${preguntas.length} · Aciertos: 0</p>`;
+  }
+
   function vistaUnidad(id) {
     const idx = DATA.unidades.findIndex(u => u.id === id);
     if (idx < 0) return vistaInicio();
     const u = DATA.unidades[idx];
     const ant = DATA.unidades[idx - 1];
     const sig = DATA.unidades[idx + 1];
-    const extra = (EXTRA[u.id] || {}).ejercicios || [];
+    const extraUd = EXTRA[u.id] || {};
+    const extra = extraUd.ejercicios || [];
+    const expl = (extraUd.explicacion || []).map(s => `
+      <section class="apartado">
+        <h3>${esc(s.titulo)}</h3>
+        ${s.parrafos.map(p => `<p>${esc(p)}</p>`).join("")}
+        ${s.codigo ? `<pre><code>${esc(s.codigo)}</code></pre>` : ""}
+      </section>`).join("");
+    const explicacion = expl ? `<h2>Explicación en profundidad</h2>${expl}` : "";
+    const quiz = (extraUd.quiz || []).length ? renderQuiz(u.id, extraUd.quiz) : "";
     const teoria = `<ul class="teoria">${u.teoria.map(t => `<li>${esc(t)}</li>`).join("")}</ul>`;
     const codigo = (u.codigo || []).map(c => `<pre><code>${esc(c)}</code></pre>`).join("");
     const ejercicios = (u.ejercicios || []).length
@@ -125,10 +150,12 @@
       <p class="etiqueta">Unidad ${u.num}</p>
       <h1>${esc(u.titulo)}</h1>
       <p class="subtitulo">${esc(u.resumen)}</p>
-      <h2>Teoría</h2>
+      ${explicacion}
+      <h2>Resumen de teoría</h2>
       ${teoria}
       ${codigo}
       ${ejercicios}
+      ${quiz}
       ${pie}`;
   }
 
@@ -218,6 +245,34 @@
       if (confirm("¿Borrar todo el progreso de este navegador?")) { guardar({}); pintar(); }
     });
   }
+
+  app.addEventListener("click", e => {
+    const btn = e.target.closest(".quiz-op");
+    if (!btn) return;
+    const li = btn.closest(".pregunta");
+    if (li.dataset.resuelta) return;
+    li.dataset.resuelta = "1";
+    const correcta = Number(li.dataset.correcta);
+    const ok = Number(btn.dataset.o) === correcta;
+    const botones = li.querySelectorAll(".quiz-op");
+    botones.forEach((b, j) => {
+      b.disabled = true;
+      if (j === correcta) b.classList.add("ok");
+      else if (b === btn) b.classList.add("mal");
+    });
+    const retro = li.querySelector(".retro");
+    retro.hidden = false;
+    retro.innerHTML = `<strong>${ok ? "Correcto." : "Incorrecto."}</strong> ${retro.textContent}`;
+    // Actualiza el marcador de la autoevaluación sin volver a pintar la página
+    const quiz = li.closest(".quiz");
+    const todas = quiz.querySelectorAll(".pregunta");
+    const resueltas = quiz.querySelectorAll(".pregunta[data-resuelta]");
+    const acertadas = quiz.querySelectorAll(".pregunta[data-resuelta]:not(:has(.quiz-op.mal))");
+    const marcador = quiz.nextElementSibling;
+    if (marcador && marcador.hasAttribute("data-marcador")) {
+      marcador.textContent = `Respondidas: ${resueltas.length} de ${todas.length} · Aciertos: ${acertadas.length}`;
+    }
+  });
 
   app.addEventListener("change", e => {
     const t = e.target;
