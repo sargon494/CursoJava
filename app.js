@@ -238,8 +238,9 @@
     if (id) {
       const ex = DATA.examenes.find(e => e.id === id);
       if (!ex) return vistaExamenes();
+      const solEx = (EXTRA[ex.id] || {}).ejercicios || [];
       const lista = ex.ejercicios.map((e, i) =>
-        bloqueEjercicio(`ex-${ex.id}`, i, e.titulo, e.texto, ejEx(ex) + i, null)
+        bloqueEjercicio(`ex-${ex.id}`, i, e.titulo, e.texto, ejEx(ex) + i, solEx[i] || null)
       ).join("");
       return `
         <p class="etiqueta">Examen</p>

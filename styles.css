@@ -149,8 +149,12 @@ code { font-family: var(--mono); font-size: .9em; }
 @media (max-width: 800px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
   .barra { position: static; height: auto; min-width: 0; border-right: none; border-bottom: 1px solid var(--linea); }
-  #menu { display: flex; flex-wrap: wrap; gap: .2rem; min-width: 0; }
-  #menu a { flex: 1 1 200px; min-width: 0; margin: 0; overflow-wrap: anywhere; }
+  /* Temario en una tira horizontal desplazable para no ocupar media pantalla */
+  #menu { display: flex; flex-wrap: nowrap; gap: .3rem; min-width: 0; overflow-x: auto; padding-bottom: .4rem; scrollbar-width: thin; }
+  #menu a { flex: 0 0 auto; white-space: nowrap; margin: 0; padding: .3rem .7rem; border: 1px solid var(--linea); border-radius: 999px; }
+  #menu a[aria-current="page"] { box-shadow: inset 0 -2px 0 var(--acento); }
+  .marca { margin-bottom: .8rem; }
+  .extras { margin-top: .8rem; padding-top: .7rem; display: flex; flex-wrap: wrap; gap: .3rem 1rem; }
   .marca, .extras, .principal { min-width: 0; }
   .extras a { min-width: 0; overflow-wrap: anywhere; }
   .principal { padding: 1.6rem 1.1rem; }
