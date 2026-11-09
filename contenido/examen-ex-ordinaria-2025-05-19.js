@@ -258,7 +258,8 @@ class SensorNotFoundException extends Exception {
         super("No existe ningún sensor con id " + id);
     }
 }
-`
+`,
+      explicacion: "CentralDeMonitoreo mantiene los sensores en un Map por ID y crea el subtipo leyendo el tipo de cada fila CSV. Sensor valida si se puede registrar una lectura y define operaciones comunes; cada subclase elige la estructura adecuada: FIFO para aire, LIFO para temperatura y conjunto sin duplicados para sismos. Optional representa que quizá no haya siguiente lectura. compareTo ordena por batería descendente y, en empate, por número de lecturas."
     }
   ]
 };

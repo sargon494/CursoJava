@@ -198,7 +198,8 @@ class GestorJuego implements GestionJuego {
         return new ArrayList<>(personajes.values());
     }
 }
-`
+`,
+      explicacion: "Personaje reúne los datos y el comportamiento comunes; Mago, Caballero y Orco añaden sus atributos específicos. El enum Ataque asocia cada nivel con su daño. El gestor usa un Map para identificar personajes por ID y realiza los ataques reduciendo la salud del objetivo sin bajar de cero. El método estático de resurrección recorre la colección y actualiza solo a los personajes muertos."
     }
   ]
 };

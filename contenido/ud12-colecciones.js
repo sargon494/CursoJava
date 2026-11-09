@@ -400,6 +400,29 @@ public class LinkedListQueue<T> {
     public static void main(String[]args){LinkedListQueue<Integer>a=new LinkedListQueue<>(),b=new LinkedListQueue<>();a.offer(1);a.offer(3);b.offer(2);a.interleave(b);System.out.println(a.poll());}
 }`
   ],
+  explicacionesSoluciones: [
+    "Al encontrar un delimitador de apertura se apila; ante uno de cierre se desapila y se comprueba que sea del tipo correspondiente. La expresión solo está balanceada si nunca hay cierres incompatibles y la pila termina vacía.",
+    "Cada operando se apila. Al encontrar un operador se extraen primero el operando derecho y luego el izquierdo, se calcula el resultado y se vuelve a apilar; al final debe quedar un único valor.",
+    "Shunting-Yard envía operandos a la salida y usa una pila para operadores. La precedencia determina cuándo sacar operadores anteriores; los paréntesis fuerzan el orden hasta encontrar su apertura.",
+    "Cada edición guarda una instantánea del texto en la pila de deshacer y limpia la pila de rehacer. Deshacer y rehacer mueven estados entre pilas, manteniendo el texto actual como estado activo.",
+    "La cola representa el orden de llegada. Cada proceso ejecuta como máximo un quantum; si le queda tiempo, se actualiza su trabajo restante y vuelve al final para dar turno a los demás.",
+    "La cola de prioridad compara primero el nivel de prioridad descendente y usa una secuencia incremental para desempatar. Así procesos con la misma prioridad salen en orden estable de llegada.",
+    "Un mapa evita NIA duplicados y conserva acceso por identificador. Un Comparator encadena comparaciones por NIA, apellidos y media, definiendo un orden determinista para el listado.",
+    "Un conjunto de inserción ordenada conserva la primera aparición y rechaza duplicados posteriores. La diferencia entre el tamaño original y el final informa cuántos elementos se eliminaron.",
+    "Se separan las palabras, se normalizan a minúsculas y se quita la puntuación. Un conjunto ordenado por inserción conserva una sola copia en el orden de su primera aparición.",
+    "Las operaciones de conjuntos se implementan con addAll, retainAll y removeAll sobre copias para no modificar accidentalmente los originales. Las pruebas de igualdad y subconjunto comparan pertenencia, no orden.",
+    "Un mapa indexa eventos por una clave de fecha y lugar para impedir duplicados. Las operaciones de rango filtran por fechas, el ordenamiento establece una secuencia y el próximo evento es el primero futuro.",
+    "Un Map asocia cada palabra con su frecuencia. Las vistas se ordenan con Comparator por frecuencia descendente y luego por palabra; limitar el resultado permite obtener las N más frecuentes.",
+    "Para cada palabra se crea un mapa de caracteres a conteos. La normalización elimina diferencias de mayúsculas y los caracteres no alfabéticos se omiten antes de incrementar la frecuencia.",
+    "El inventario busca productos por nombre y actualiza stock al vender o reponer. Las consultas filtran el stock bajo, el listado se ordena por nombre y se eliminan solo los productos agotados.",
+    "Un mapa agrupa las notas por estudiante y asignatura. Las medias se calculan con suma y cantidad; después se comparan las medias para identificar los extremos sin mezclar asignaturas.",
+    "Cada producto aporta su precio a un subtotal y el IVA se calcula sobre la base imponible. La factura suma subtotales y aplica el porcentaje una sola vez al total según la regla del ejercicio.",
+    "Un mapa por día agrupa tareas y sus listas conservan el orden de llegada. Para la próxima fecha con tareas se avanza desde el día actual hasta encontrar una entrada no vacía, contemplando el cambio de semana.",
+    "La lista propia mantiene referencias entre nodos y actualiza head/tail y size tras cada cambio. Las operaciones recorren o enlazan nodos, y clonar crea nodos nuevos para no compartir estructura mutable.",
+    "La pila guarda elementos en un array y controla una cima para las operaciones básicas. Hanoi se resuelve recursivamente moviendo n-1 discos, luego el mayor y finalmente el grupo temporal.",
+    "La cola enlazada actualiza cabeza y cola al insertar o retirar, y sus métodos de combinación recorren enlaces sin perder el orden. La prioridad de llamadas se representa con colas separadas o un comparador que ordena urgente, normal y baja."
+  ],
+
   explicacion: [
     { titulo: "1. Elegir la estructura adecuada", parrafos: [
       "Una colección no es solo una forma de guardar datos: su contrato determina cómo se consultan, en qué orden aparecen y qué coste tiene cada operación. List conserva posiciones, Set expresa unicidad, Map relaciona claves con valores y Queue modela procesamiento pendiente.",
@@ -449,6 +472,13 @@ lista.sort(Comparator.comparing(Alumno::getApellidos));` },
 };
 const ejerciciosColecciones = window.CONTENIDO["colecciones"].ejercicios;
 const solucionesColecciones = window.CONTENIDO["colecciones"].soluciones;
-if (ejerciciosColecciones.length !== solucionesColecciones.length) throw new Error("Cada ejercicio de colecciones debe tener su solución.");
-ejerciciosColecciones.forEach((ejercicio, indice) => { ejercicio.solucion = solucionesColecciones[indice]; });
+const explicacionesSolucionesColecciones = window.CONTENIDO["colecciones"].explicacionesSoluciones;
+if (ejerciciosColecciones.length !== solucionesColecciones.length || ejerciciosColecciones.length !== explicacionesSolucionesColecciones.length) {
+  throw new Error("Cada ejercicio de colecciones debe tener una solución y su explicación.");
+}
+ejerciciosColecciones.forEach((ejercicio, indice) => {
+  ejercicio.solucion = solucionesColecciones[indice];
+  ejercicio.explicacion = explicacionesSolucionesColecciones[indice];
+});
 delete window.CONTENIDO["colecciones"].soluciones;
+delete window.CONTENIDO["colecciones"].explicacionesSoluciones;

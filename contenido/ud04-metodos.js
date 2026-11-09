@@ -312,6 +312,24 @@ public class SumaRecursiva {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "saludar recibe el nombre como parámetro y se ocupa solo de mostrar el mensaje. main gestiona la entrada y llama al método, separando la interacción con el usuario de la acción reutilizable.",
+    "El método devuelve n multiplicado por sí mismo tres veces. Se usa int porque el enunciado pide enteros; los casos negativo y cero se resuelven naturalmente por las reglas de la multiplicación.",
+    "multiplicar concentra la operación en un método reutilizable. El bucle de main cambia el segundo factor de 1 a 10 para construir la tabla sin repetir la fórmula.",
+    "Un número es par si su resto al dividirlo entre dos es cero. El método devuelve un booleano y main usa ese resultado para decidir qué mensaje mostrar.",
+    "mostrarMenu solo presenta las opciones; el bucle de main lee la elección y repite hasta recibir cero. Separar mostrar y controlar el menú mantiene clara cada responsabilidad.",
+    "En cada posición del cuadrado, dos condiciones detectan si está en el borde. Se imprimen asteriscos en todo el interior para la versión rellena y solo en el borde para la versión hueca.",
+    "La fila determina cuántos caracteres imprime el triángulo. La variante hueca marca el primer y último carácter de cada fila, además de imprimir completa la base.",
+    "El menú obtiene una opción y delega el dibujo en el método correspondiente. El caso de salida termina el bucle; una rama por opción evita mezclar la lógica de las figuras.",
+    "El caso base es n menor que 10, que representa una cifra. Para valores mayores, la llamada con n / 10 cuenta las cifras restantes y suma una por la cifra eliminada.",
+    "La potencia se reduce a base multiplicada por la potencia con exponente uno menor. Cuando el exponente llega a cero se devuelve 1; los negativos se rechazan porque no forman parte del dominio pedido.",
+    "La recursión separa la última cifra con % 10 y continúa con n / 10. Se usa una escala decimal para colocar cada cifra en su posición inversa; al reconstruir como entero, los ceros iniciales desaparecen.",
+    "Cada llamada examina la última cifra con % 10, que debe ser 0 o 1, y continúa con n / 10. El caso base indica que ya no quedan cifras válidas por revisar.",
+    "La conversión divide n entre dos y añade el resto a la representación de la parte más significativa. El caso base en cero devuelve una cadena vacía; para la entrada cero se devuelve explícitamente \"0\".",
+    "Se comparan los dos primeros caracteres; si están ordenados, la llamada recursiva comprueba el resto de la palabra. Una cadena con menos de dos caracteres ya está ordenada.",
+    "El caso base n = 1 produce \"1 = 1\". Cada paso añade n a la expresión anterior y calcula la nueva suma, hasta construir toda la secuencia sin perder el total acumulado."
+  ],
+
   explicacion: [
     {
       titulo: "1. Un método pone nombre a una tarea",
@@ -455,10 +473,13 @@ static double maximo(double a, double b) {
 
 const ejerciciosMetodos = window.CONTENIDO["metodos"].ejercicios;
 const solucionesMetodos = window.CONTENIDO["metodos"].soluciones;
-if (ejerciciosMetodos.length !== solucionesMetodos.length) {
-  throw new Error("Cada ejercicio de métodos debe tener su solución.");
+const explicacionesSolucionesMetodos = window.CONTENIDO["metodos"].explicacionesSoluciones;
+if (ejerciciosMetodos.length !== solucionesMetodos.length || ejerciciosMetodos.length !== explicacionesSolucionesMetodos.length) {
+  throw new Error("Cada ejercicio de métodos debe tener una solución y su explicación.");
 }
 ejerciciosMetodos.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesMetodos[indice];
+  ejercicio.explicacion = explicacionesSolucionesMetodos[indice];
 });
 delete window.CONTENIDO["metodos"].soluciones;
+delete window.CONTENIDO["metodos"].explicacionesSoluciones;

@@ -16,7 +16,8 @@ public class Saludo {
         System.out.println("Hola, " + nombre + " " + apellido + ". ¡Bienvenido/a!");
         sc.close();
     }
-}`
+}`,
+      explicacion: "Scanner permite leer lo que escribe el usuario. nextLine() recoge el nombre y el apellido completos, incluidos espacios; después, el operador + concatena ambas entradas con el texto del saludo. Al final se cierra el Scanner."
     },
     {
       enunciado: "Escribe un programa que pida la base y la altura de un triángulo y calcule e imprima su área con la fórmula (base × altura) / 2.",
@@ -33,7 +34,8 @@ public class AreaTriangulo {
         System.out.println("Área: " + area);
         sc.close();
     }
-}`
+}`,
+      explicacion: "Se leen base y altura como double para admitir valores decimales. La fórmula multiplica ambas medidas y divide entre dos; como al menos un operando es decimal, la división conserva posibles decimales en el resultado."
     },
     {
       enunciado: "Realiza un programa que pida una temperatura en grados Celsius y la convierta a Fahrenheit con la fórmula F = C × 9/5 + 32.",
@@ -48,7 +50,8 @@ public class CelsiusFahrenheit {
         System.out.println(c + " ºC = " + f + " ºF");
         sc.close();
     }
-}`
+}`,
+      explicacion: "La fórmula convierte primero la escala multiplicando los grados Celsius por 9/5 y luego suma 32 para ajustar el origen de Fahrenheit. c es double, así que las operaciones se hacen con decimales y no se pierde la fracción."
     },
     {
       enunciado: "Crea un programa que pida los dos catetos de un triángulo rectángulo y calcule la hipotenusa con el teorema de Pitágoras.",
@@ -65,7 +68,8 @@ public class Hipotenusa {
         System.out.println("Hipotenusa: " + hipotenusa);
         sc.close();
     }
-}`
+}`,
+      explicacion: "El teorema de Pitágoras dice que la hipotenusa al cuadrado es la suma de los cuadrados de los catetos. El código calcula esa suma y Math.sqrt obtiene su raíz cuadrada, que es la longitud buscada."
     },
     {
       enunciado: "Escribe un programa que pida tres números enteros, calcule su promedio y lo muestre en pantalla.",
@@ -85,7 +89,8 @@ public class MediaTres {
         System.out.println("Media: " + media);
         sc.close();
     }
-}`
+}`,
+      explicacion: "Se suman los tres enteros y se divide entre 3.0 para forzar una división decimal: si se dividiera entre el entero 3, Java descartaría la parte fraccionaria antes de guardar el resultado en double."
     },
     {
       enunciado: "Escribe un programa que pida el nombre y los dos apellidos del usuario y muestre sus iniciales.",
@@ -104,7 +109,8 @@ public class Iniciales {
         System.out.println("Iniciales: " + nombre.charAt(0) + "." + apellido1.charAt(0) + "." + apellido2.charAt(0) + ".");
         sc.close();
     }
-}`
+}`,
+      explicacion: "Cada lectura se guarda en un String y charAt(0) extrae su primer carácter, cuyo índice es cero. Se concatenan las tres iniciales con puntos. La solución presupone que el usuario escribe algo en cada campo; una cadena vacía no tendría carácter en la posición cero."
     }
   ],
 
@@ -285,4 +291,3 @@ sc.close();`
     }
   ]
 };
-

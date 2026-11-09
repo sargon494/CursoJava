@@ -145,6 +145,12 @@ code { font-family: var(--mono); font-size: .9em; }
 .solucion summary::before { content: "▸ "; }
 .solucion[open] summary::before { content: "▾ "; }
 .solucion pre { margin: .6rem 0 0; font-size: .82rem; }
+.explicacion-solucion {
+  margin-top: .8rem; padding: .8rem 1rem; border-left: 3px solid var(--acento);
+  background: var(--papel-2); border-radius: 0 var(--radio) var(--radio) 0;
+}
+.explicacion-solucion strong { color: var(--acento); }
+.explicacion-solucion p { margin: .25rem 0 0; color: var(--tinta-suave); font-size: .94rem; }
 
 @media (max-width: 800px) {
   .layout { grid-template-columns: minmax(0, 1fr); }

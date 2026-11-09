@@ -206,6 +206,14 @@ public class GestionHotelera {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "La entrada se repite hasta que sea numérica y el divisor distinto de cero. InputMismatchException trata el tipo incorrecto y se descarta el token inválido; ArithmeticException cubre la división no válida sin terminar el programa.",
+    "El método de raíz comprueba el dominio antes de calcular y lanza una excepción comprobada propia si el número es negativo. El llamador captura ese caso y vuelve a pedir un valor, separando validación y recuperación.",
+    "Cada regla de validación produce su excepción específica, de modo que el llamador puede indicar exactamente qué campo falló. El registro solo se crea cuando nombre, edad y correo superan sus comprobaciones.",
+    "La biblioteca centraliza el material y su estado. Las excepciones distinguen duplicados, identificadores inexistentes y transiciones de préstamo inválidas; el menú las captura para informar al usuario y continuar.",
+    "Reservable define las operaciones comunes y cada habitación valida sus propias condiciones. Excepciones distintas identifican habitación duplicada u ocupada, reserva ausente o cliente repetido; la interfaz comunica el error de forma explícita."
+  ],
+
   explicacion: [
     {
       titulo: "1. Excepción: un fallo como parte del flujo explícito",
@@ -339,10 +347,13 @@ public class GestionHotelera {
 
 const ejerciciosExcepciones = window.CONTENIDO["excepciones"].ejercicios;
 const solucionesExcepciones = window.CONTENIDO["excepciones"].soluciones;
-if (ejerciciosExcepciones.length !== solucionesExcepciones.length) {
-  throw new Error("Cada ejercicio de excepciones debe tener su solución.");
+const explicacionesSolucionesExcepciones = window.CONTENIDO["excepciones"].explicacionesSoluciones;
+if (ejerciciosExcepciones.length !== solucionesExcepciones.length || ejerciciosExcepciones.length !== explicacionesSolucionesExcepciones.length) {
+  throw new Error("Cada ejercicio de excepciones debe tener una solución y su explicación.");
 }
 ejerciciosExcepciones.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesExcepciones[indice];
+  ejercicio.explicacion = explicacionesSolucionesExcepciones[indice];
 });
 delete window.CONTENIDO["excepciones"].soluciones;
+delete window.CONTENIDO["excepciones"].explicacionesSoluciones;

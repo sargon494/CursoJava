@@ -109,7 +109,8 @@ class Paquete implements Serializable {
         return idPaquete + ";" + peso + ";" + direccionEnvio + ";" + urgente + ";" + precio;
     }
 }
-`
+`,
+      explicacion: "El método del directorio selecciona solo ficheros inmediatos y delega la lectura de cada uno. En cada fichero, la primera línea se convierte en tarifa y las siguientes se separan por punto y coma; cada fila válida crea un Paquete cuyo precio es peso por tarifa. try-with-resources cierra el lector automáticamente y los errores de lectura o formato se notifican."
     },
     {
       enunciado: `Funcionalidad (2.25 puntos): crea un método que reciba como argumento la ruta de un fichero de texto y la lista de paquetes procesados. Deberá generar un informe con el número total de paquetes, el precio medio de envío, el peso máximo encontrado y la fecha del día de hoy.
@@ -179,7 +180,8 @@ class Paquete implements java.io.Serializable {
     public boolean isUrgente() { return urgente; }
     public double getPrecio() { return precio; }
 }
-`
+`,
+      explicacion: "Los streams extraen de la lista los precios para calcular la media y los pesos para hallar el máximo. orElse(0) define qué informar si la lista está vacía. LocalDate obtiene la fecha actual, y List.of reúne las líneas que Files.write guarda en UTF-8. String.format limita importes y peso a dos decimales."
     },
     {
       enunciado: `Funcionalidad (2.25 puntos): crea un método que reciba la ruta de un archivo binario. El método debe filtrar y guardar objeto a objeto en dicho archivo únicamente aquellos paquetes cuyo envío sea urgente.`,
@@ -224,7 +226,8 @@ class Paquete implements java.io.Serializable {
     public boolean isUrgente() { return urgente; }
     public double getPrecio() { return precio; }
 }
-`
+`,
+      explicacion: "ObjectOutputStream serializa objetos Java en un fichero binario. El bucle recorre todos los paquetes, pero writeObject solo se ejecuta para los urgentes. Paquete implementa Serializable para permitir esa conversión; try-with-resources cierra el flujo incluso si ocurre un error."
     },
     {
       enunciado: `Funcionalidad (2.5 puntos): crea un método que reciba la ruta del archivo binario generado en el apartado anterior, lea los objetos uno a uno hasta llegar al final del fichero y los cargue en una nueva lista. Si había datos previamente guardados, sobrescríbelos.`,
@@ -275,7 +278,8 @@ class Paquete implements java.io.Serializable {
     public boolean isUrgente() { return urgente; }
     public double getPrecio() { return precio; }
 }
-`
+`,
+      explicacion: "Se crea una lista nueva para que la carga sustituya cualquier contenido anterior. readObject devuelve un objeto cada vez y el bucle termina al llegar al fin del fichero, indicado por EOFException. Esa excepción se usa aquí como señal normal de fin; el resto de errores de entrada/salida o clases desconocidas se propagan al llamador."
     }
   ]
 };

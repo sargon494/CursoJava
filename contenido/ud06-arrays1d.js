@@ -314,6 +314,27 @@ public class Hotel {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "Se valida el tamaño antes de crear el array: los negativos no son válidos y cero produce un array vacío. El bucle lee exactamente una posición por elemento y devuelve la referencia creada.",
+    "Se crea un array de longitud n y se rellena con valores aleatorios. nextInt(1000) produce 0..999; al sumar uno se obtiene el intervalo inclusivo 1..1000. Arrays.toString facilita imprimirlo.",
+    "La suma se acumula en un tipo que evita desbordamientos innecesarios y se divide por la longitud como double. Para un array vacío no hay media, así que se aplica la decisión explícita del ejercicio.",
+    "Primero se obtiene la media y después se cuenta cada elemento que la iguala o supera. El límite es double para conservar la precisión de la media, aunque los datos sean enteros.",
+    "La búsqueda lineal revisa desde el índice cero y devuelve al momento la primera coincidencia. Si termina el bucle, el valor no está y se devuelve -1 como indicador.",
+    "BigInteger conserva resultados que exceden el rango de long. Se actualiza el factorial sucesivamente y se convierte a long solo cuando el valor es representable; para mostrarlo exactamente se imprime el BigInteger.",
+    "Se recorre el array hasta encontrar el objetivo; en ese momento se devuelve true. Si no hay coincidencia tras revisar todos los elementos, se devuelve false.",
+    "Cada entrada se comprueba contra los valores ya recogidos y solo se añade si aún no aparece. El array de resultado conserva el orden de primera aparición, sin reorganizar los datos.",
+    "Los argumentos de main están en String[] args. El bucle usa cada índice para mostrar tanto la posición como el texto asociado; no se confunden con los datos escritos después de iniciar el programa.",
+    "Se crea un array nuevo y se copia el elemento i en la posición simétrica length - 1 - i. El original permanece intacto y los extremos quedan intercambiados.",
+    "Se comparan parejas adyacentes y se devuelve false en cuanto una anterior supera a la siguiente. Los arrays de cero o un elemento no tienen parejas desordenadas, por eso cumplen la condición.",
+    "Primero se valida que haya al menos tres elementos. Se avanza estrictamente hasta un máximo interior y luego se exige descenso estricto; cualquier meseta, pico en un extremo o segundo pico invalida la forma.",
+    "Cada bit desplaza el valor acumulado una posición binaria y añade el siguiente dígito. Se verifica que cada elemento sea 0 o 1 y se detecta el desbordamiento antes de completar la conversión.",
+    "El array resultante tiene la suma de las longitudes. Se copian primero los valores de a y luego los de b, ajustando el índice destino para que el segundo segmento continúe al primero.",
+    "Se calcula el tamaño de cada mitad según la regla indicada para longitudes pares e impares. Después se copia el prefijo de a y se completa el resultado con el sufijo correspondiente de b.",
+    "Cada elemento se eleva al cuadrado en la misma posición. Math.multiplyExact lanza ArithmeticException si el producto no cabe en int, en vez de aceptar un resultado desbordado silenciosamente.",
+    "Un booleano por habitación representa libre u ocupada. El menú repite operaciones sobre el índice elegido; antes de cambiar el estado se valida que la habitación exista y que la acción sea coherente.",
+    "Un recorrido suma una coincidencia por cada posición igual al objetivo. Como no se ejecuta ninguna vuelta con un array vacío, el resultado inicial cero cubre ese caso."
+  ],
+
   explicacion: [
     {
       titulo: "1. Un array es una secuencia de tamaño fijo",
@@ -449,10 +470,13 @@ for (int bit : bits) {
 
 const ejerciciosArrays1d = window.CONTENIDO["arrays1d"].ejercicios;
 const solucionesArrays1d = window.CONTENIDO["arrays1d"].soluciones;
-if (ejerciciosArrays1d.length !== solucionesArrays1d.length) {
-  throw new Error("Cada ejercicio de arrays debe tener su solución.");
+const explicacionesSolucionesArrays1d = window.CONTENIDO["arrays1d"].explicacionesSoluciones;
+if (ejerciciosArrays1d.length !== solucionesArrays1d.length || ejerciciosArrays1d.length !== explicacionesSolucionesArrays1d.length) {
+  throw new Error("Cada ejercicio de arrays debe tener una solución y su explicación.");
 }
 ejerciciosArrays1d.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesArrays1d[indice];
+  ejercicio.explicacion = explicacionesSolucionesArrays1d[indice];
 });
 delete window.CONTENIDO["arrays1d"].soluciones;
+delete window.CONTENIDO["arrays1d"].explicacionesSoluciones;

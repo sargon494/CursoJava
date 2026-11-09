@@ -278,6 +278,22 @@ public class InformeNotas {
     }
 }`
   ],
+  explicacionesSoluciones: [
+    "Cada texto se convierte a Path y Files.exists consulta el sistema de archivos. Se procesa cada ruta por separado para informar de existencia sin asumir que todos los elementos sean ficheros.",
+    "Se recorren primero los ficheros y se eliminan solo los de tamaño cero. Después se inspeccionan directorios y se borran únicamente si están vacíos; así no se elimina una carpeta que aún contiene datos.",
+    "Files.walk visita cada ruta del árbol y devuelve un stream que debe cerrarse. Files.isDirectory distingue directorios de archivos y el prefijo pedido hace legible el listado.",
+    "El recorrido recursivo inspecciona cada fichero, compara su extensión y guarda la ruta absoluta de las coincidencias. Las carpetas se recorren, pero no se incluyen como resultados.",
+    "Para cada directorio se calcula la profundidad de sus subdirectorios y se conserva la máxima. La raíz tiene profundidad cero; sumar un nivel al descender permite comparar ramas de distinta longitud.",
+    "La palabra buscada se trata como texto literal y se normalizan texto y consulta para ignorar mayúsculas. Se cuentan coincidencias no solapadas recorriendo el contenido sin usar la palabra como expresión regular.",
+    "Se localizan las coincidencias de palabra completa con límites adecuados y se escribe un nuevo fichero sin ellas. La búsqueda ignora mayúsculas, pero la salida conserva el texto restante.",
+    "Cada letra se desplaza dentro de su alfabeto conservando si es mayúscula o minúscula. El descifrado usa el desplazamiento inverso; los caracteres ajenos al alfabeto permanecen sin cambios.",
+    "Las filas CSV se convierten en libros y un mapa indexado por ISBN evita duplicados. El catálogo se ordena y busca en memoria, y Object streams persisten los objetos sin perder sus tipos.",
+    "Cada movimiento guarda su importe y el saldo resultante tras aplicarlo. La serialización conserva el historial y un recorrido permite separar ingresos de gastos para presentarlos.",
+    "Un mapa asocia cada evento con sus participantes únicos. Se carga el texto, se evita repetir asistentes, se serializa la estructura y se genera el informe recorriendo los datos ya organizados.",
+    "La cola de llamadas se serializa para conservar su estado entre ejecuciones. La prioridad distingue urgentes, normales y bajas; la extracción siempre atiende primero la clase más prioritaria.",
+    "Cada fila se valida antes de convertir sus notas; una fila incorrecta se informa y no detiene la carga completa. Con las válidas se calculan medias y estados y se escribe un informe final."
+  ],
+
   explicacion: [
     { titulo: "1. Rutas y operaciones de NIO.2", parrafos: [
       "Path representa una ruta y Files ofrece operaciones para consultar, recorrer, leer, escribir, copiar y borrar. Separar Path de las operaciones concretas facilita trabajar con rutas relativas, absolutas y distintos sistemas operativos.",
@@ -318,6 +334,13 @@ public class InformeNotas {
 };
 const ejerciciosFicheros = window.CONTENIDO["ficheros"].ejercicios;
 const solucionesFicheros = window.CONTENIDO["ficheros"].soluciones;
-if (ejerciciosFicheros.length !== solucionesFicheros.length) throw new Error("Cada ejercicio de ficheros debe tener su solución.");
-ejerciciosFicheros.forEach((ejercicio, indice) => { ejercicio.solucion = solucionesFicheros[indice]; });
+const explicacionesSolucionesFicheros = window.CONTENIDO["ficheros"].explicacionesSoluciones;
+if (ejerciciosFicheros.length !== solucionesFicheros.length || ejerciciosFicheros.length !== explicacionesSolucionesFicheros.length) {
+  throw new Error("Cada ejercicio de ficheros debe tener una solución y su explicación.");
+}
+ejerciciosFicheros.forEach((ejercicio, indice) => {
+  ejercicio.solucion = solucionesFicheros[indice];
+  ejercicio.explicacion = explicacionesSolucionesFicheros[indice];
+});
 delete window.CONTENIDO["ficheros"].soluciones;
+delete window.CONTENIDO["ficheros"].explicacionesSoluciones;

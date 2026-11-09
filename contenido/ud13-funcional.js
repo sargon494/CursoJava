@@ -123,6 +123,15 @@ public class PersonasCSV {
     }
 }`
   ],
+  explicacionesSoluciones: [
+    "groupingBy cuenta las muestras por especie. Las frecuencias permiten escoger la especie con mayor cantidad y comprobar que el mínimo y el máximo coinciden para todas.",
+    "Se proyectan las medidas numéricas para calcular las dos medias y se usan comparadores para localizar el pétalo más largo y el sépalo más estrecho, evitando ordenar toda la colección.",
+    "Se agrupa primero por especie y después se calcula la media del pétalo y el máximo de cada grupo. La agrupación mantiene juntos los datos que deben compararse entre sí.",
+    "El filtro expresa cada condición de forma independiente y las combina: ancho del sépalo mayor que largo, pétalo mayor que sépalo y pétalo superior a cinco. Solo pasan las flores que cumplen todas.",
+    "Las series se construyen desde las medidas de las flores y se entregan a XChart para dibujar distribuciones y relaciones. La biblioteca solo interviene en la visualización; las estadísticas provienen de los datos.",
+    "Files.lines procesa el fichero como un stream que se cierra con try-with-resources. Cada línea se convierte en persona, se filtran mayores de edad y se transforma el nombre a mayúsculas sin cargar todo el fichero en memoria."
+  ],
+
   explicacion: [
     { titulo: "1. Lambdas e interfaces funcionales", parrafos: [
       "Una lambda es una implementación breve de una interfaz funcional: una interfaz con un único método abstracto. El tipo se deduce del contexto, por eso una expresión lambda no existe de forma aislada sin un tipo funcional esperado.",
@@ -172,6 +181,13 @@ primero.ifPresent(System.out::println);` },
 };
 const ejerciciosFuncional = window.CONTENIDO["funcional"].ejercicios;
 const solucionesFuncional = window.CONTENIDO["funcional"].soluciones;
-if (ejerciciosFuncional.length !== solucionesFuncional.length) throw new Error("Cada ejercicio funcional debe tener su solución.");
-ejerciciosFuncional.forEach((ejercicio, indice) => { ejercicio.solucion = solucionesFuncional[indice]; });
+const explicacionesSolucionesFuncional = window.CONTENIDO["funcional"].explicacionesSoluciones;
+if (ejerciciosFuncional.length !== solucionesFuncional.length || ejerciciosFuncional.length !== explicacionesSolucionesFuncional.length) {
+  throw new Error("Cada ejercicio funcional debe tener una solución y su explicación.");
+}
+ejerciciosFuncional.forEach((ejercicio, indice) => {
+  ejercicio.solucion = solucionesFuncional[indice];
+  ejercicio.explicacion = explicacionesSolucionesFuncional[indice];
+});
 delete window.CONTENIDO["funcional"].soluciones;
+delete window.CONTENIDO["funcional"].explicacionesSoluciones;

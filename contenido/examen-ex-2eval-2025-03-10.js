@@ -104,7 +104,8 @@ interface Stack<T> extends Iterable<T> {
     T peek() throws EmptyStackException;
     boolean isEmpty();
 }
-`
+`,
+      explicacion: "La cima apunta al nodo más reciente: push lo enlaza delante y pop desplaza la cima al siguiente nodo, por eso ambas operaciones son O(1). pop y peek lanzan EmptyStackException cuando no hay elementos. El iterador empieza en la cima y sigue los enlaces hacia la base, sin modificar la pila; next avanza o lanza NoSuchElementException al agotarse."
     },
     {
       enunciado: `Ejercicio 2
@@ -327,7 +328,8 @@ class PropertyNotFoundException extends Exception {
         super("No existe ningun inmueble con catastro " + numeroCatastro);
     }
 }
-`
+`,
+      explicacion: "Inmobiliaria usa un Map indexado por catastro para buscar e impedir duplicados con eficiencia. Las operaciones individuales lanzan excepciones cuando corresponde; la inserción por lote usa putIfAbsent para ignorar repetidos. Inmueble concentra datos y comparación, y las subclases sobrescriben el impuesto según su tipo. El recorrido del catálogo calcula la media y cuenta solo viviendas disponibles."
     }
   ]
 };

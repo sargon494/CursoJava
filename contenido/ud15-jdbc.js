@@ -87,6 +87,12 @@ public class ModificarBorrarContacto {
     }
 }`
   ],
+  explicacionesSoluciones: [
+    "DriverManager abre la conexión y PreparedStatement ejecuta la consulta. ResultSet representa las filas devueltas: next avanza una a una y getString obtiene las columnas necesarias. try-with-resources libera conexión y recursos.",
+    "Los valores de entrada se validan antes de ejecutar la inserción. PreparedStatement separa la instrucción SQL de los datos y evita concatenarlos en la consulta; executeUpdate devuelve cuántas filas se insertaron.",
+    "La misma conexión ejecuta UPDATE o DELETE con parámetros enlazados, filtrando por id. executeUpdate devuelve filas afectadas, lo que permite avisar si no existía el contacto; los recursos se cierran automáticamente."
+  ],
+
   explicacion: [
     { titulo: "1. Por qué una base de datos", parrafos: [
       "Guardar todo en ficheros puede duplicar información, producir versiones inconsistentes y acoplar los datos a un formato que solo entiende un programa. Un SGBD administra almacenamiento, consultas, restricciones, concurrencia y permisos.",
@@ -133,6 +139,13 @@ try {
 };
 const ejerciciosJDBC = window.CONTENIDO["bbdd"].ejercicios;
 const solucionesJDBC = window.CONTENIDO["bbdd"].soluciones;
-if (ejerciciosJDBC.length !== solucionesJDBC.length) throw new Error("Cada ejercicio JDBC debe tener su solución.");
-ejerciciosJDBC.forEach((ejercicio, indice) => { ejercicio.solucion = solucionesJDBC[indice]; });
+const explicacionesSolucionesJDBC = window.CONTENIDO["bbdd"].explicacionesSoluciones;
+if (ejerciciosJDBC.length !== solucionesJDBC.length || ejerciciosJDBC.length !== explicacionesSolucionesJDBC.length) {
+  throw new Error("Cada ejercicio JDBC debe tener una solución y su explicación.");
+}
+ejerciciosJDBC.forEach((ejercicio, indice) => {
+  ejercicio.solucion = solucionesJDBC[indice];
+  ejercicio.explicacion = explicacionesSolucionesJDBC[indice];
+});
 delete window.CONTENIDO["bbdd"].soluciones;
+delete window.CONTENIDO["bbdd"].explicacionesSoluciones;

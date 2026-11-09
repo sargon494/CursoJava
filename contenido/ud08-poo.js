@@ -535,6 +535,25 @@ public class Grimorio {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "Empleado encapsula sus datos y valida que salario y retención tengan valores permitidos. El neto se calcula aplicando cada tramo marginal solo a la parte que cae en él; la ficha presenta el resultado formateado.",
+    "Los constructores inicializan coordenadas por defecto o recibidas. La suma crea un nuevo punto con las coordenadas sumadas y el escalado multiplica ambas por el factor, sin alterar el objeto original.",
+    "La línea conserva dos puntos; las diferencias de coordenadas permiten calcular distancia y pendiente. Si delta X es cero, es vertical y la pendiente no está definida. El paralelismo compara direcciones, y desplazar aplica el mismo cambio a ambos extremos.",
+    "El vector copia el array de entrada y devuelve copias para evitar que código externo cambie su estado. Las operaciones que combinan dos vectores exigen igual dimensión; magnitud, producto escalar y perpendicularidad se derivan de las coordenadas.",
+    "El radio se valida al construir el círculo. Área y perímetro aplican sus fórmulas; desplazar crea o actualiza el centro. La distancia entre centros comparada con el radio determina si un punto está dentro.",
+    "El intervalo cerrado valida inicio <= fin y su longitud es fin - inicio. contains incluye ambos extremos; la unión solo existe si los intervalos se solapan o se tocan, y el desplazamiento suma el mismo valor a los límites.",
+    "La fracción se normaliza con el máximo común divisor y se mueve cualquier signo al numerador. Las operaciones cruzan numeradores y denominadores según sus fórmulas; la equivalencia compara fracciones ya reducidas.",
+    "Palo es un enum que limita los valores válidos. Carta traduce palo y valor a texto, detecta figuras según su rango y compara primero el valor y luego el palo para desempatar.",
+    "Pokemon mantiene la salud dentro de sus límites y subir de nivel o curar actualiza el estado de forma controlada. Atacar calcula el daño según la ventaja de tipo y estaDebilitado comprueba si la salud llegó a cero.",
+    "EntrenadorPokemon centraliza el equipo y rechaza duplicados o un séptimo integrante. Los métodos recorren esa colección para curar, retirar o contar por tipo; el entrenamiento elige un miembro al azar.",
+    "EmpleadoTech modela el vínculo con un supervisor y comprueba la cadena para evitar ciclos. El sueldo neto aplica la retención, y una subida reparte el importe entre el empleado y su supervisor según las reglas establecidas.",
+    "Hotel encapsula cada habitación en una clase interna que puede acceder al contexto del hotel. El check-in y check-out validan ocupación, y la factura multiplica la tarifa por las noches alojadas.",
+    "La clase base guarda nombre, precio y stock; los subtipos añaden vencimiento o garantía. Vender reduce stock solo si hay unidades suficientes, reponer lo aumenta y cada subtipo informa de su condición específica.",
+    "La clase base conserva el estado de préstamo y los subtipos representan libros y revistas. Prestar solo cambia el estado si estaba disponible; devolver exige que estuviera prestado, evitando transiciones inválidas.",
+    "Vehiculo define matrícula y usa ese identificador para equals (y hashCode coherente). Coche y Moto heredan lo común, agregan sus atributos y sobrescriben toString para incluir los datos particulares.",
+    "Elemento y los subtipos restringen los hechizos válidos y delegan el coste según su clase. Grimorio administra la colección, filtra por tipo y solo permite lanzar el hechizo si se cumplen sus requisitos."
+  ],
+
   explicacion: [
     {
       titulo: "1. Clases, objetos y estado",
@@ -689,10 +708,13 @@ enum Prioridad {
 
 const ejerciciosPoo = window.CONTENIDO["poo"].ejercicios;
 const solucionesPoo = window.CONTENIDO["poo"].soluciones;
-if (ejerciciosPoo.length !== solucionesPoo.length) {
-  throw new Error("Cada ejercicio de POO debe tener su solución.");
+const explicacionesSolucionesPoo = window.CONTENIDO["poo"].explicacionesSoluciones;
+if (ejerciciosPoo.length !== solucionesPoo.length || ejerciciosPoo.length !== explicacionesSolucionesPoo.length) {
+  throw new Error("Cada ejercicio de POO debe tener una solución y su explicación.");
 }
 ejerciciosPoo.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesPoo[indice];
+  ejercicio.explicacion = explicacionesSolucionesPoo[indice];
 });
 delete window.CONTENIDO["poo"].soluciones;
+delete window.CONTENIDO["poo"].explicacionesSoluciones;

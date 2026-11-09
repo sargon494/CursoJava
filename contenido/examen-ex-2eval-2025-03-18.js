@@ -132,7 +132,8 @@ interface List<T> {
     void agregarInicio(T dato);
     int size();
 }
-`
+`,
+      explicacion: "Los métodos lineales recorren los nodos desde head hasta null. Objects.equals compara con seguridad incluso si el valor buscado o el dato es null. clear desvincula toda la cadena y sincroniza size; obtenerUltimo comprueba primero el caso vacío y, si hay nodos, avanza hasta el que no tiene sucesor."
     },
     {
       enunciado: `Ejercicio 2
@@ -432,7 +433,8 @@ class IncompatibleDietaryException extends Exception {
         super("El plato " + nombre + " no puede ser vegano por contener huevo o pescado");
     }
 }
-`
+`,
+      explicacion: "La clase base guarda lo común y delega el precio a cada subtipo; también centraliza alérgenos, comparación y datos compartidos. PlatoPrincipal valida la incompatibilidad vegana y añade el suplemento, mientras Entrante aplica su regla de comensales y descuento. GestionRestaurante usa un mapa para nombres únicos y una cola de prioridad que ordena primero platos calientes y después por llegada. Los recorridos calculan estadísticas y el recuento por alérgeno."
     }
   ]
 };

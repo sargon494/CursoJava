@@ -343,6 +343,20 @@ public class Triangulo2D {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "Vehiculo define el contrato de cálculo y sus datos comunes; Camion y Autobus implementan sus propias fórmulas. La flota puede recorrer una lista de Vehiculo y llamar al método sobrescrito sin distinguir el subtipo.",
+    "Empleado concentra los datos comunes y cada modalidad calcula su salario con reglas propias. Procesar la lista por el tipo real permite aplicar polimórficamente jornada completa o pago por horas.",
+    "FiguraGeometrica declara operaciones comunes. Círculo, rectángulo y triángulo implementan sus fórmulas, y la suma del área se obtiene recorriendo una colección heterogénea y llamando a area().",
+    "ProductoBase aporta nombre y precio y exige que sus subtipos definan lo específico. Comparable compara por precio y permite ordenar productos de distintos tipos; la validación impide precios negativos.",
+    "VehiculoCombate agrupa estado y operaciones compartidas, mientras Tanque, Avion y Barco definen capacidades de ataque. El gestor impone el máximo de unidades y evita acciones inválidas sobre unidades destruidas.",
+    "Warrior define el protocolo de combate y cada clase concreta implementa su ataque. El equipo conserva distintos tipos de guerrero y los recorre para atacar, aprovechando el despacho dinámico.",
+    "ProductoBase encapsula el precio y define el cálculo común; Perecedero y Electronico sobrescriben impuestos o recargos. Al recorrer el inventario como productos base, cada elemento calcula su precio según su clase real.",
+    "MaterialBibliografico mantiene los datos y el estado común de préstamo. Libro y Revista especializan el plazo; los métodos comunes validan cambios de estado y el polimorfismo selecciona el comportamiento correspondiente.",
+    "equals compara matrículas y hashCode debe usar el mismo criterio para que colecciones basadas en hash funcionen correctamente. Coche y Moto heredan esa identidad y personalizan su representación textual.",
+    "Cuenta concentra el saldo y define las operaciones comunes; cada tipo de cuenta implementa sus límites y comisiones. Los métodos rechazan cantidades inválidas antes de modificar el saldo.",
+    "Figura2D representa el contrato general y Triangulo concreta los cálculos. La desigualdad triangular valida que los lados formen una figura real; después se clasifica por igualdad y se formatea el perímetro."
+  ],
+
   explicacion: [
     {
       titulo: "1. Herencia modela una relación «es un»",
@@ -466,10 +480,13 @@ public int hashCode() {
 
 const ejerciciosHerencia = window.CONTENIDO["herencia"].ejercicios;
 const solucionesHerencia = window.CONTENIDO["herencia"].soluciones;
-if (ejerciciosHerencia.length !== solucionesHerencia.length) {
-  throw new Error("Cada ejercicio de herencia debe tener su solución.");
+const explicacionesSolucionesHerencia = window.CONTENIDO["herencia"].explicacionesSoluciones;
+if (ejerciciosHerencia.length !== solucionesHerencia.length || ejerciciosHerencia.length !== explicacionesSolucionesHerencia.length) {
+  throw new Error("Cada ejercicio de herencia debe tener una solución y su explicación.");
 }
 ejerciciosHerencia.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesHerencia[indice];
+  ejercicio.explicacion = explicacionesSolucionesHerencia[indice];
 });
 delete window.CONTENIDO["herencia"].soluciones;
+delete window.CONTENIDO["herencia"].explicacionesSoluciones;

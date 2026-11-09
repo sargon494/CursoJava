@@ -227,7 +227,8 @@ class BookNotAvaibleException extends Exception {
         super("El libro con ISBN " + isbn + " no esta disponible");
     }
 }
-`
+`,
+      explicacion: "El catálogo usa un Map para localizar libros por ISBN, una lista para conservar el orden cronológico de préstamos y un TreeSet para obtener editoriales únicas y ordenadas. Los datos se convierten al leer cada línea CSV; los préstamos actualizan tanto el estado del libro como el historial. Para la búsqueda, título y consulta se pasan a minúsculas antes de comparar, y los resultados se escriben con el formato solicitado."
     }
   ]
 };

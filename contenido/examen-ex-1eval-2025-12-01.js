@@ -33,8 +33,8 @@ esImPARfecto(1357) → true (cifras: 1, 3, 5, 7 → todas son impares y 1 + 3 + 
         System.out.println(esImPARfecto(1357));  // true
         System.out.println(esImPARfecto(2));     // false
     }
-}
-`
+}`,
+      explicacion: "Se procesa el número cifra a cifra: % 10 extrae la última y / 10 la elimina. En cada paso se comprueba que la cifra sea impar y se suma. El do-while también procesa el cero; al final solo devuelve true si todas las cifras eran impares y la suma es par. Convertir antes a long permite manejar Integer.MIN_VALUE sin desbordar al aplicar abs."
     },
     {
       enunciado: `Ejercicio 2 (RA1, RA3, RA6) (2.5 puntos)
@@ -65,8 +65,8 @@ contarApariciones("", 'x') → 0 (El carácter 'x' no aparece en el String "Java
         System.out.println(contarApariciones(null, 'x'));          // 0
         System.out.println(contarApariciones("", 'x'));            // 0
     }
-}
-`
+}`,
+      explicacion: "Primero se resuelven los casos nulo y vacío, que no contienen coincidencias y además no se pueden recorrer normalmente. El for visita cada índice, charAt obtiene su carácter y el contador aumenta solo cuando coincide con el buscado. El método devuelve el total acumulado."
     },
     {
       enunciado: `Ejercicio 3 (RA1, RA3, RA6) (5 puntos)
@@ -174,8 +174,8 @@ public class FacturaProductos {
         System.out.println("Producto más caro:");
         System.out.printf(Locale.US, "Producto %d...%.2f€%n", indiceMax + 1, precios[indiceMax]);
     }
-}
-`
+}`,
+      explicacion: "El array conserva los precios para reutilizarlos en las distintas opciones del menú. El do-while muestra el menú al menos una vez y continúa hasta elegir salir; sus métodos auxiliares separan las tareas. Para hallar el más caro se guarda el índice del máximo y se actualiza al encontrar uno mayor. Locale.US fija el punto decimal al leer y mostrar precios."
     }
   ]
 };

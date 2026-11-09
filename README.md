@@ -19,8 +19,9 @@ El curso no necesita dependencias ni un proceso de compilación. El progreso de 
 1. Lee la explicación y reproduce los ejemplos.
 2. Resuelve los ejercicios en Eclipse, sin copiar la solución.
 3. Prueba entradas normales, límites y casos inválidos.
-4. Marca los ejercicios terminados y completa la autoevaluación.
-5. Usa los exámenes para practicar problemas que combinan varias unidades.
+4. Cuando termines, abre la solución y lee debajo la explicación para entender las decisiones del código.
+5. Marca los ejercicios terminados y completa la autoevaluación.
+6. Usa los exámenes para practicar problemas que combinan varias unidades.
 
 Las soluciones disponibles son material de revisión: intenta resolver primero el ejercicio y compara después tu enfoque con la propuesta.
 

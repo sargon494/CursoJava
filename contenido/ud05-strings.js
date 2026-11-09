@@ -258,6 +258,22 @@ public class SepararTexto {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "Un bucle recorre todos los índices y compara charAt(i) con el carácter buscado. El contador solo aumenta en coincidencias, por lo que una cadena vacía devuelve cero sin tratamiento especial.",
+    "La búsqueda termina en cuanto aparece una coincidencia. Si el recorrido llega al final sin encontrarla, el método devuelve false; no hace falta contar todas las apariciones.",
+    "Se recorren los índices desde length() - 1 hasta cero y se añade cada carácter a una nueva cadena. Así se invierte el orden sin utilizar reverse().",
+    "Cada carácter se normaliza para detectar vocales en ambas mayúsculas y minúsculas. Se agrega un asterisco si es vocal y el carácter original en caso contrario, conservando el resto del texto.",
+    "Se comparan simultáneamente el primer y el último carácter y se avanza hacia el centro. Una diferencia descarta la palabra; si todos los pares coinciden, es palíndroma. La normalización evita distinguir mayúsculas.",
+    "El bucle imprime un espacio antes de cada carácter salvo el primero. Esta condición conserva los separadores entre caracteres sin dejar un espacio sobrante al final.",
+    "Se guarda la palabra más larga vista hasta el momento y solo se reemplaza si aparece otra estrictamente más larga. Al no reemplazar en empates, se conserva la primera palabra máxima.",
+    "trim elimina espacios de los extremos y el recorrido detecta el inicio de cada secuencia no vacía. Un contador aumenta al pasar de separador a carácter, no por cada espacio, por lo que los espacios repetidos no crean palabras vacías.",
+    "El método compara caracteres desde ambos extremos y termina al encontrar una pareja distinta o alcanzar el centro. El caso de una sola letra y la cadena vacía se consideran palíndromos.",
+    "La expresión regular se ancla con ^ y $ para validar la cadena completa: ocho dígitos, guion y una letra. Solo comprueba la forma del NIF; no calcula ni valida su letra de control.",
+    "La expresión regular detecta el patrón día/mes/año, pero no basta para rechazar fechas imposibles. Se convierte el texto a una fecha real, dejando que la API de fechas valide días, meses y años bisiestos.",
+    "Los lookaheads exigen la presencia de minúscula, mayúscula y dígito sin consumir esos caracteres. La longitud se valida en el patrón; todos los requisitos deben cumplirse para aceptar la contraseña.",
+    "split recibe una expresión regular que agrupa uno o más separadores. trim evita elementos vacíos en los extremos y se descartan tokens vacíos para ignorar separadores repetidos."
+  ],
+
   explicacion: [
     {
       titulo: "1. String guarda texto y es inmutable",
@@ -399,10 +415,13 @@ String[] partes = texto.split("[\\\\s,;.]+");`
 
 const ejerciciosStrings = window.CONTENIDO["strings"].ejercicios;
 const solucionesStrings = window.CONTENIDO["strings"].soluciones;
-if (ejerciciosStrings.length !== solucionesStrings.length) {
-  throw new Error("Cada ejercicio de cadenas debe tener su solución.");
+const explicacionesSolucionesStrings = window.CONTENIDO["strings"].explicacionesSoluciones;
+if (ejerciciosStrings.length !== solucionesStrings.length || ejerciciosStrings.length !== explicacionesSolucionesStrings.length) {
+  throw new Error("Cada ejercicio de cadenas debe tener una solución y su explicación.");
 }
 ejerciciosStrings.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesStrings[indice];
+  ejercicio.explicacion = explicacionesSolucionesStrings[indice];
 });
 delete window.CONTENIDO["strings"].soluciones;
+delete window.CONTENIDO["strings"].explicacionesSoluciones;

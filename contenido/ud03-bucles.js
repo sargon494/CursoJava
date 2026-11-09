@@ -357,6 +357,25 @@ public class RectanguloAsteriscos {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "El factorial se inicia en 1 y el bucle lo multiplica por cada entero hasta n. Así, con n igual a 0 no se ejecuta ninguna vuelta y se conserva 0! = 1. Se limita n a 20 porque 20! cabe en long, pero 21! no.",
+    "El cero actúa como centinela y se comprueba antes de sumar, por lo que no entra en el total ni en la cantidad. La media solo se calcula cuando esa cantidad es mayor que cero, evitando dividir entre cero.",
+    "Random.nextInt(100) + 1 produce el rango inclusivo 1..100. El contador limita los intentos a diez; tras una respuesta incorrecta se compara con el objetivo para dar la pista adecuada y el bucle termina al acertar o agotar intentos.",
+    "El primer bucle lee exactamente la cantidad indicada y clasifica cada valor con comparaciones contra cero. Se mantienen contadores independientes para positivos, negativos y ceros, de modo que cada entrada incrementa una sola categoría.",
+    "Se leen caracteres hasta el espacio, que funciona como centinela y no se clasifica. Character.toLowerCase normaliza mayúsculas; una condición comprueba si el carácter es alguna de las cinco vocales.",
+    "Se ordenan conceptualmente los extremos para que el recorrido vaya de menor a mayor, y se ajusta el inicio al primer par si hace falta. Después se avanza de dos en dos para visitar solo pares, incluidos los límites cuando corresponden.",
+    "Un for recorre los multiplicadores del 1 al 10. En cada vuelta se imprime la operación completa y su producto, sin duplicar código para cada línea de la tabla.",
+    "Cada número se compara con los límites en orden, incluyendo ambos extremos. Los que pertenecen al intervalo se suman; los demás incrementan un contador. El cero detiene la lectura y queda fuera de ambas estadísticas.",
+    "Los números menores que 2 se descartan antes de buscar divisores. Para los demás basta probar hasta la raíz cuadrada: si existiera un factor mayor, tendría una pareja menor ya comprobada. Se detiene en cuanto aparece un divisor.",
+    "El bucle lee exactamente n valores y acumula su suma. La cantidad se valida antes de leer; si es cero o negativa no existe media. La división se realiza en decimal para no truncar el resultado.",
+    "Cada división entre 10 elimina una cifra y el contador registra cuántas veces se repite el proceso. Se trata el cero aparte porque no entraría al bucle normal; para negativos se usa su magnitud con cuidado de no desbordar.",
+    "El algoritmo de Euclides reemplaza repetidamente (a, b) por (b, a % b) hasta que el resto es cero; entonces a es el MCD. Se normalizan los signos para que el resultado sea no negativo y se contempla el caso de ambos valores cero.",
+    "El bucle exterior controla la fila y el interior imprime tantos asteriscos como número de fila. Un salto de línea al terminar cada fila crea el triángulo alineado a la izquierda.",
+    "El bucle exterior elige el número de la tabla y el interior recorre sus multiplicadores. La combinación genera cada pareja una vez, evitando escribir manualmente las cien multiplicaciones.",
+    "Para cada fila, un bucle interior imprime las cifras desde 1 hasta el número de fila. El crecimiento del límite produce las líneas 1, 12, 123 y así sucesivamente.",
+    "Se validan altura y anchura antes de dibujar. Dos bucles anidados producen una fila por vuelta exterior y exactamente anchura asteriscos en cada vuelta interior."
+  ],
+
   explicacion: [
     {
       titulo: "1. Repetir instrucciones es una decisión de diseño",
@@ -521,10 +540,13 @@ while (i < n) {
 
 const ejerciciosBucles = window.CONTENIDO["bucles"].ejercicios;
 const solucionesBucles = window.CONTENIDO["bucles"].soluciones;
-if (ejerciciosBucles.length !== solucionesBucles.length) {
-  throw new Error("Cada ejercicio de bucles debe tener su solución.");
+const explicacionesSolucionesBucles = window.CONTENIDO["bucles"].explicacionesSoluciones;
+if (ejerciciosBucles.length !== solucionesBucles.length || ejerciciosBucles.length !== explicacionesSolucionesBucles.length) {
+  throw new Error("Cada ejercicio de bucles debe tener una solución y su explicación.");
 }
 ejerciciosBucles.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesBucles[indice];
+  ejercicio.explicacion = explicacionesSolucionesBucles[indice];
 });
 delete window.CONTENIDO["bucles"].soluciones;
+delete window.CONTENIDO["bucles"].explicacionesSoluciones;

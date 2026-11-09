@@ -421,6 +421,30 @@ public class MaximoMatricesIrregulares {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "Se recorren primero las filas y luego sus columnas. Cada valor se imprime con un separador salvo el último de la fila; al terminar las columnas se imprime el salto de línea.",
+    "Se visita cada elemento de todas las filas no vacías y se conserva el mayor encontrado. Un indicador distingue una matriz sin elementos de una que sí contiene valores; en el primer caso se rechaza la operación.",
+    "Dos bucles recorren filas y columnas y acumulan en long para admitir sumas mayores que int. El valor inicial cero también es correcto si no hay elementos.",
+    "Se crea un resultado con una posición por fila. Cada fila se suma de manera independiente, incluso si es null o está vacía, en cuyo caso su suma es cero.",
+    "Se verifica que haya el mismo número de filas y columnas antes de calcular medias. Cada fila se suma y se divide entre su cantidad de columnas; una dimensión sin columnas no permite calcular una media.",
+    "Un recorrido por filas cuenta cada elemento igual a cero. La matriz irregular se maneja usando la longitud propia de cada fila, no la longitud de la primera.",
+    "El método compara cada elemento con el objetivo y aumenta un contador por coincidencia. Como cada fila puede tener tamaño distinto, el bucle interior usa su longitud individual.",
+    "Una matriz identidad debe ser cuadrada. En cada posición se espera 1 si fila y columna coinciden, y 0 en cualquier otra; un solo valor distinto permite devolver false.",
+    "Se reserva una matriz n x n inicialmente llena de ceros y se asigna 1 en las posiciones donde índice de fila e índice de columna son iguales. Se valida n antes de crearla.",
+    "Se recorren las posiciones de ambas diagonales con índices calculados a partir de la fila. El centro de una matriz impar pertenece a ambas y se suma en cada resultado, tal como pide el enunciado.",
+    "La matriz transpuesta intercambia filas por columnas: el elemento original [i][j] se coloca en [j][i]. El resultado invierte las dimensiones, por lo que también funciona en matrices rectangulares.",
+    "Tras comprobar que es cuadrada, se comparan las posiciones enfrentadas respecto de la diagonal: matriz[i][j] con matriz[j][i]. Una diferencia indica que no es simétrica.",
+    "Para cada fila se calcula la disyunción de sus valores; luego se exige que todas esas disyunciones sean true mediante AND. La matriz vacía se trata explícitamente según la convención elegida en la solución.",
+    "Cada posición se asigna con un entero aleatorio del 1 al 100, incluidos. Los dos bucles garantizan que se rellenen todas las celdas de la matriz cuadrada.",
+    "Se validan las dimensiones, se leen n² valores en orden de filas y columnas y se muestra la matriz con el mismo recorrido. El anidamiento mantiene correspondencia entre cada entrada y su posición.",
+    "Se valida que m esté entre cero y n². La solución selecciona posiciones distintas antes de marcar true, de modo que termina con exactamente m valores verdaderos y no con una cantidad aproximada.",
+    "La multiplicación es posible si columnas de A coinciden con filas de B. Para cada celda del resultado se suman los productos de una fila de A por una columna de B.",
+    "Una rotación horaria transforma cada posición [i][j] en [j][n - 1 - i]. Se construye una matriz nueva para no sobrescribir valores que aún falten por mover.",
+    "Se colocan n barcos en coordenadas distintas y se guardan los disparos previos para impedir repetirlos. El juego termina al acertar todos o alcanzar el límite de intentos calculado con división entera.",
+    "Se crea una fila destino por cada fila de cualquiera de las matrices y con la longitud mayor en esa posición. En cada columna se conserva el único valor disponible o se elige el máximo cuando ambos existen.",
+    "Se calcula el ancho máximo necesario para el marco y cada línea se rellena hasta esa medida. Las mismas rutinas de presentación reutilizan el marco para arrays y filas irregulares sin truncar contenido."
+  ],
+
   explicacion: [
     {
       titulo: "1. Un array bidimensional es un array de arrays",
@@ -561,10 +585,13 @@ irregular[2] = new int[] {3};`
 
 const ejerciciosArrays2d = window.CONTENIDO["arrays2d"].ejercicios;
 const solucionesArrays2d = window.CONTENIDO["arrays2d"].soluciones;
-if (ejerciciosArrays2d.length !== solucionesArrays2d.length) {
-  throw new Error("Cada ejercicio de matrices debe tener su solución.");
+const explicacionesSolucionesArrays2d = window.CONTENIDO["arrays2d"].explicacionesSoluciones;
+if (ejerciciosArrays2d.length !== solucionesArrays2d.length || ejerciciosArrays2d.length !== explicacionesSolucionesArrays2d.length) {
+  throw new Error("Cada ejercicio de matrices debe tener una solución y su explicación.");
 }
 ejerciciosArrays2d.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesArrays2d[indice];
+  ejercicio.explicacion = explicacionesSolucionesArrays2d[indice];
 });
 delete window.CONTENIDO["arrays2d"].soluciones;
+delete window.CONTENIDO["arrays2d"].explicacionesSoluciones;

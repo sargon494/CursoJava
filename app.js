@@ -91,7 +91,10 @@
     const hecho = marcado(clave);
     const enunciado = (extra && extra.enunciado) || textoBase;
     const solucion = extra && extra.solucion
-      ? `<details class="solucion"><summary>Ver solución</summary><pre><code>${esc(extra.solucion)}</code></pre></details>`
+      ? `<details class="solucion"><summary>Ver solución y explicación</summary>
+          <pre><code>${esc(extra.solucion)}</code></pre>
+          ${extra.explicacion ? `<div class="explicacion-solucion"><strong>Cómo entenderla</strong><p>${esc(extra.explicacion)}</p></div>` : ""}
+        </details>`
       : "";
     return `<li class="ejercicio ${hecho ? "hecho" : ""}">
       <input type="checkbox" id="${esc(id)}-${indice}" data-clave="${esc(clave)}" ${hecho ? "checked" : ""}>

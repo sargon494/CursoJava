@@ -148,6 +148,17 @@ public class CopiarTipos {
 }`
   ],
 
+  explicacionesSoluciones: [
+    "Caja<T> guarda un valor de cualquier tipo sin perder seguridad de tipos. Un booleano indica si se ha guardado algo, de modo que null puede ser un contenido válido y no se confunde con una caja vacía.",
+    "Par<K,V> conserva dos valores tipados e inmutables. equals compara ambos contenidos y hashCode usa los mismos campos, lo que permite que pares iguales funcionen correctamente en colecciones.",
+    "El método acepta un array del tipo T y compara cada elemento con el objetivo usando equals. Devuelve enseguida el primer índice coincidente o -1 tras recorrer el array completo.",
+    "El límite T extends Number permite usar métodos numéricos de Double, Integer y tipos similares. Se convierte cada número a double para sumar; la lista vacía se rechaza porque su media no está definida.",
+    "Comparable<T> garantiza que los valores puedan compararse. El método reutiliza compareTo para obtener mínimo y máximo, y revisa parejas consecutivas para detectar si el orden es ascendente.",
+    "Pila<T> enlaza nodos y mantiene el tamaño al insertar o retirar. push y pop trabajan en la cima; pop y peek comprueban antes si está vacía para no acceder a un nodo inexistente.",
+    "Se crea un nuevo array y se copia cada elemento en la posición opuesta. El método genérico conserva el tipo T y no altera los datos de entrada.",
+    "El origen usa ? extends T porque solo se leen elementos compatibles con T; el destino usa ? super T porque recibe esos elementos. Es el principio PECS: productor extends, consumidor super."
+  ],
+
   explicacion: [
     {
       titulo: "1. Tipos genéricos y seguridad en compilación",
@@ -285,10 +296,13 @@ static <T> T crear(java.util.function.Supplier<T> fabrica) {
 
 const ejerciciosGenericos = window.CONTENIDO["genericos"].ejercicios;
 const solucionesGenericos = window.CONTENIDO["genericos"].soluciones;
-if (ejerciciosGenericos.length !== solucionesGenericos.length) {
-  throw new Error("Cada ejercicio de genéricos debe tener su solución.");
+const explicacionesSolucionesGenericos = window.CONTENIDO["genericos"].explicacionesSoluciones;
+if (ejerciciosGenericos.length !== solucionesGenericos.length || ejerciciosGenericos.length !== explicacionesSolucionesGenericos.length) {
+  throw new Error("Cada ejercicio de genéricos debe tener una solución y su explicación.");
 }
 ejerciciosGenericos.forEach((ejercicio, indice) => {
   ejercicio.solucion = solucionesGenericos[indice];
+  ejercicio.explicacion = explicacionesSolucionesGenericos[indice];
 });
 delete window.CONTENIDO["genericos"].soluciones;
+delete window.CONTENIDO["genericos"].explicacionesSoluciones;

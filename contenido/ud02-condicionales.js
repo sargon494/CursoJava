@@ -18,7 +18,8 @@ public class ParOImpar {
         }
         sc.close();
     }
-}`
+}`,
+      explicacion: "El resto de dividir un entero entre 2 (n % 2) es cero exactamente cuando el número es par. El if compara ese resto con cero y el else cubre el único caso restante: impar."
     },
     {
       enunciado: "Pide dos números. Si el segundo no es cero, muestra la división del primero entre el segundo; si es cero, muestra un error.",
@@ -38,7 +39,8 @@ public class DivisionVerificada {
         }
         sc.close();
     }
-}`
+}`,
+      explicacion: "Antes de dividir se comprueba que b sea distinto de cero, evitando una división inválida. Los datos son double para admitir decimales; si b vale cero, se muestra el error en vez de calcular a / b."
     },
     {
       enunciado: "Pide un nombre de usuario y una contraseña. Si son \"vespertino\" y \"VivaErBetis\", muestra \"Has entrado al sistema\"; si no, muestra un error.",
@@ -59,7 +61,8 @@ public class Autenticacion {
         }
         sc.close();
     }
-}`
+}`,
+      explicacion: "Las cadenas se comparan por contenido con equals(), no con ==, que compararía referencias a objetos. El operador && exige que usuario y contraseña coincidan a la vez; si falla cualquiera, se ejecuta el mensaje de error."
     },
     {
       enunciado: "Pide una cadena y comprueba si está escrita completamente en mayúsculas.",
@@ -78,7 +81,8 @@ public class ComprobarMayusculas {
         }
         sc.close();
     }
-}`
+}`,
+      explicacion: "toUpperCase() crea una versión en mayúsculas. Si es igual al texto original, no había letras minúsculas que cambiar. También se consideran válidas las cadenas sin letras, como una cadena vacía o formada solo por números."
     },
     {
       enunciado: "Pide una base y un exponente. Si el exponente es positivo muestra la potencia; si es 0, muestra 1; si es negativo, muestra 1 / potencia con exponente positivo.",
@@ -102,7 +106,8 @@ public class Potencia {
         System.out.println("Resultado: " + resultado);
         sc.close();
     }
-}`
+}`,
+      explicacion: "Se separan los tres casos del exponente: Math.pow calcula potencias positivas, todo número distinto de cero elevado a cero vale 1 y un exponente negativo usa la inversa de la potencia positiva correspondiente. Por ejemplo, 2^-3 se calcula como 1 / 2^3."
     },
     {
       enunciado: "Pide tres números y los muestra ordenados de mayor a menor.",
@@ -123,7 +128,8 @@ public class OrdenarTres {
         System.out.println(mayor + " >= " + medio + " >= " + menor);
         sc.close();
     }
-}`
+}`,
+      explicacion: "Math.max obtiene el mayor y Math.min el menor de los tres valores. Como la suma original equivale a mayor + medio + menor, al restar de ella los extremos queda el valor intermedio. El método también funciona cuando hay valores repetidos."
     },
     {
       enunciado: "Pide las longitudes de los tres lados de un triángulo (A, B, C) y determina su tipo: rectángulo si cumple Pitágoras, equilátero si los tres son iguales, isósceles si dos son iguales, y escaleno en otro caso.",
@@ -157,7 +163,8 @@ public class TipoTriangulo {
         }
         sc.close();
     }
-}`
+}`,
+      explicacion: "Primero se identifican el lado mayor y los otros dos para comprobar el teorema de Pitágoras en el orden correcto. La tolerancia 1e-9 evita exigir igualdad exacta a double. Después se clasifica por igualdad de lados, comprobando equilátero antes que isósceles para no confundirlos. La solución muestra si es rectángulo y además informa su tipo por lados."
     },
     {
       enunciado: "Lee un año y determina si es bisiesto: divisible por 4 pero no por 100, salvo que también sea divisible por 400.",
@@ -172,7 +179,8 @@ public class Bisiesto {
         System.out.println(anio + (bisiesto ? " es bisiesto" : " no es bisiesto"));
         sc.close();
     }
-}`
+}`,
+      explicacion: "Un año es bisiesto si es divisible por 4 y no por 100, o si es divisible por 400. Los paréntesis agrupan la primera regla y || añade la excepción de los múltiplos de 400. El ternario elige el mensaje según el booleano."
     },
     {
       enunciado: "Calcula el coste de un viaje escolar. Con 100 o más alumnos, 65 € por alumno; entre 50 y 99, 70 €; entre 30 y 49, 95 €; con menos de 30, el autobús cuesta 4000 € en total. Muestra el pago total a la compañía y lo que paga cada alumno.",
@@ -209,7 +217,8 @@ public class ViajeEscolar {
         System.out.println("Cada alumno paga: " + precioAlumno + " €");
         sc.close();
     }
-}`
+}`,
+      explicacion: "Se validan primero los alumnos para impedir dividir entre cero. La cadena if/else if asigna la tarifa por persona de mayor a menor cantidad; con menos de 30, el coste es fijo y se reparte entre el grupo. El valor -1 solo sirve como señal interna de ese caso."
     },
     {
       enunciado: "Calcula el coste de una llamada según su duración en minutos: los 5 primeros a 1 €; los minutos 6, 7 y 8 a 0,80 €; los minutos 9 y 10 a 0,70 €; a partir del minuto 11, a 0,50 € cada minuto.",
@@ -233,7 +242,8 @@ public class CobroLlamada {
         System.out.printf("Coste total: %.2f €%n", coste);
         sc.close();
     }
-}`
+}`,
+      explicacion: "Cada rama calcula el precio acumulado de los tramos ya completados y suma los minutos restantes al precio del tramo actual. Por ejemplo, al superar ocho minutos, los primeros cinco y los tres siguientes se cobran a sus tarifas originales, y solo los minutos posteriores usan 0,70 €."
     },
     {
       enunciado: "Pide un número del 1 al 7 y muestra el nombre del día de la semana correspondiente (1 = lunes, etc.).",
@@ -262,7 +272,8 @@ public class DiaSemana {
         }
         sc.close();
     }
-}`
+}`,
+      explicacion: "switch asigna a nombre el día asociado a cada número. Cada break evita continuar en el siguiente caso; default marca entradas fuera del rango con null. La comprobación posterior decide si se muestra el día o un aviso de número inválido."
     },
     {
       enunciado: "Pide un número del 1 al 12 y muestra cuántos días tiene ese mes (febrero, 28 días).",
@@ -294,7 +305,8 @@ public class DiasMes {
         }
         sc.close();
     }
-}`
+}`,
+      explicacion: "Los meses se agrupan por número de días: febrero, los cuatro meses de 30 días y los siete meses de 31 días. En switch se pueden agrupar varios case con el mismo resultado. El valor -1 distingue una entrada inválida de cualquier cantidad real de días."
     },
     {
       enunciado: "Muestra un menú con cinco zonas (América del Norte 24 €/g, América Central 20 €/g, América del Sur 21 €/g, Europa 10 €/g, Asia 18 €/g). Pide la zona y el peso en kilogramos. Si el peso supera 5 kg, rechaza el paquete; si no, calcula el coste.",
@@ -332,7 +344,8 @@ public class EnvioInternacional {
         }
         sc.close();
     }
-}`
+}`,
+      explicacion: "El primer switch traduce la opción elegida a una tarifa y termina el programa si la zona no existe. Luego se comprueba el límite de peso; si se acepta el paquete, se convierten los kilogramos a gramos (1 kg = 1000 g) antes de multiplicar por la tarifa en euros por gramo."
     }
   ],
 
