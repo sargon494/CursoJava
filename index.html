@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Curso completo y progresivo de Java: desde los fundamentos hasta colecciones, archivos, pruebas y concurrencia.">
+    <title>Java Mastery | Curso completo de Java</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        .glass { background: rgba(15, 23, 42, .88); backdrop-filter: blur(12px); }
+        .lesson-card { transition: background-color .2s ease, color .2s ease, transform .2s ease; }
+        .lesson-card:hover { transform: translateX(3px); }
+        .progress-bar { transition: width .4s ease; }
+        .lesson-card[aria-current="true"] { background: rgba(249, 115, 22, .16); color: #fdba74; }
+    </style>
+</head>
+<body class="min-h-screen bg-[#0f172a] text-slate-200">
+    <nav class="glass fixed inset-x-0 top-0 z-50 flex min-h-20 items-center justify-between gap-4 border-b border-slate-700 px-4 py-3 sm:px-6">
+        <a href="#" class="flex shrink-0 items-center gap-2" aria-label="Java Mastery, inicio" onclick="showWelcome(); return false;">
+            <span class="rounded-lg bg-orange-500 p-2"><i data-lucide="coffee" class="text-white"></i></span>
+            <span class="text-lg font-extrabold tracking-tight text-white sm:text-xl">JAVA<span class="text-orange-500">MASTERY</span></span>
+        </a>
+        <div class="min-w-0 flex-1 sm:flex-none">
+            <div class="mb-1 flex justify-end gap-2 text-xs text-slate-400 sm:text-sm">
+                <span>Tu progreso</span>
+                <span id="progress-text" class="font-bold text-orange-400">0%</span>
+                <span id="progress-count" class="hidden sm:inline">0 de 36 lecciones</span>
+            </div>
+            <div class="h-2 w-full overflow-hidden rounded-full bg-slate-800 sm:w-56" role="progressbar" aria-label="Progreso del curso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div id="progress-bar" class="progress-bar h-full w-0 bg-orange-500"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mx-auto flex max-w-[1600px] pt-20">
+        <aside class="sticky top-20 hidden h-[calc(100vh-5rem)] w-80 shrink-0 overflow-y-auto border-r border-slate-700 bg-[#1e293b] p-5 md:block">
+            <h2 class="mb-5 text-xs font-bold uppercase tracking-widest text-slate-400">Temario del curso</h2>
+            <div id="module-list" class="space-y-6"></div>
+        </aside>
+
+        <main class="min-w-0 flex-1 p-5 sm:p-8 lg:p-12">
+            <div class="mx-auto max-w-5xl">
+                <label for="mobile-lesson-select" class="mb-5 block text-sm font-semibold text-slate-300 md:hidden">Ir a una lección</label>
+                <select id="mobile-lesson-select" class="mb-7 w-full rounded-xl border border-slate-700 bg-slate-800 p-3 text-slate-100 md:hidden" aria-label="Selecciona una lección"></select>
+
+                <section id="welcome-screen" class="py-8 sm:py-16">
+                    <p class="mb-4 font-semibold uppercase tracking-[.2em] text-orange-400">De cero a tus primeros proyectos</p>
+                    <h1 class="mb-6 text-4xl font-black leading-tight text-white sm:text-6xl">Aprende Java paso a paso <span aria-hidden="true">☕</span></h1>
+                    <p class="mb-10 max-w-3xl text-lg leading-relaxed text-slate-300">Un recorrido progresivo por los fundamentos del lenguaje, la programación orientada a objetos, las colecciones, los archivos, las pruebas y la concurrencia. Cada lección incluye explicación, ejemplo y un reto para practicar.</p>
+                    <div class="mb-10 grid gap-4 sm:grid-cols-3">
+                        <div class="rounded-2xl border border-slate-700 bg-slate-800/60 p-5">
+                            <i data-lucide="layers" class="mb-3 text-orange-400"></i>
+                            <h2 class="font-bold text-white">12 módulos</h2>
+                            <p class="mt-1 text-sm text-slate-400">De la instalación a un proyecto final.</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-700 bg-slate-800/60 p-5">
+                            <i data-lucide="book-open-check" class="mb-3 text-blue-400"></i>
+                            <h2 class="font-bold text-white">36 lecciones</h2>
+                            <p class="mt-1 text-sm text-slate-400">Teoría esencial, código y ejercicios.</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-700 bg-slate-800/60 p-5">
+                            <i data-lucide="save" class="mb-3 text-green-400"></i>
+                            <h2 class="font-bold text-white">Progreso guardado</h2>
+                            <p class="mt-1 text-sm text-slate-400">Tu avance se conserva en este navegador.</p>
+                        </div>
+                    </div>
+                    <button id="start-button" class="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-6 py-3 font-bold text-white transition hover:bg-orange-400">
+                        Empezar por la primera lección <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    </button>
+                </section>
+
+                <section id="content-area" class="hidden" aria-live="polite"></section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const modules = [
+            {
+                title: '1. Primeros pasos',
+                icon: 'rocket',
+                lessons: [
+                    { id: 'jdk-jvm', title: 'JDK, JRE y JVM', theory: 'Java se compila a <b>bytecode</b>, que ejecuta la <b>JVM</b>. El <b>JDK</b> incluye las herramientas para compilar y desarrollar. Instala un JDK y comprueba la instalación con <code>java -version</code> y <code>javac -version</code>.', code: 'javac Hola.java\njava Hola', challenge: 'Instala un JDK, crea una carpeta para tus prácticas y ejecuta los dos comandos de versión.' },
+                    { id: 'hello-world', title: 'Tu primer programa', theory: 'Un programa Java suele comenzar en el método <code>main</code>. El nombre del archivo debe coincidir con el de la clase pública. Las instrucciones terminan con punto y coma.', code: 'public class Hola {\n    public static void main(String[] args) {\n        System.out.println("¡Hola, Java!");\n    }\n}', challenge: 'Crea una clase Saludo que imprima tu nombre y una meta que quieras alcanzar aprendiendo Java.' },
+                    { id: 'variables-types', title: 'Variables y tipos', theory: 'Las variables guardan valores. Java distingue tipos primitivos como <code>int</code>, <code>double</code> y <code>boolean</code>, y tipos de referencia como <code>String</code>. Usa nombres descriptivos y declara cada variable con su tipo.', code: 'String nombre = "Ana";\nint edad = 20;\ndouble altura = 1.68;\nboolean estudiante = true;\nSystem.out.println(nombre + " tiene " + edad + " años");', challenge: 'Declara variables para describir un libro (título, páginas, precio y si está disponible) e imprime sus datos.' }
+                ]
+            },
+            {
+                title: '2. Datos, operadores y entrada',
+                icon: 'binary',
+                lessons: [
+                    { id: 'operators', title: 'Operadores y conversiones', theory: 'Los operadores aritméticos calculan valores; los relacionales comparan y producen un booleano. La conversión implícita amplía tipos compatibles, mientras que el <i>casting</i> explícito puede perder precisión.', code: 'int total = 7 / 2;            // 3\n double promedio = 7 / 2.0;   // 3.5\nint redondeado = (int) 3.9;  // 3\nboolean aprobado = promedio >= 5;', challenge: 'Calcula el precio final de un producto con IVA y muestra el resultado con decimales.' },
+                    { id: 'input-output', title: 'Entrada y salida', theory: '<code>System.out.println</code> muestra texto y <code>Scanner</code> permite leer datos del teclado. Para leer una línea completa usa <code>nextLine()</code>; ten cuidado al combinarlo con métodos numéricos de Scanner.', code: 'import java.util.Scanner;\n\nScanner entrada = new Scanner(System.in);\nSystem.out.print("¿Cómo te llamas? ");\nString nombre = entrada.nextLine();\nSystem.out.println("Hola, " + nombre);', challenge: 'Pide al usuario dos números y muestra su suma y su producto.' },
+                    { id: 'conditionals', title: 'Condicionales', theory: 'Usa <code>if</code>/<code>else</code> para elegir entre caminos según una condición. <code>switch</code> resulta útil cuando comparas una expresión con varios valores concretos.', code: 'int nota = 8;\nif (nota >= 5) {\n    System.out.println("Aprobado");\n} else {\n    System.out.println("A seguir practicando");\n}', challenge: 'Lee una nota del 0 al 10 y muestra si está suspensa, aprobada, notable o sobresaliente.' }
+                ]
+            },
+            {
+                title: '3. Control del flujo',
+                icon: 'repeat',
+                lessons: [
+                    { id: 'for-loops', title: 'Bucle for', theory: 'El bucle <code>for</code> agrupa inicialización, condición y actualización. Es ideal para recorrer un rango conocido de valores y ejecutar una tarea repetida.', code: 'for (int i = 1; i <= 5; i++) {\n    System.out.println("Vuelta " + i);\n}', challenge: 'Imprime los números pares del 2 al 20 y calcula su suma.' },
+                    { id: 'while-loops', title: 'while y do-while', theory: '<code>while</code> repite mientras una condición sea verdadera. <code>do-while</code> evalúa la condición al final, así que ejecuta su bloque al menos una vez.', code: 'int intentos = 0;\nwhile (intentos < 3) {\n    System.out.println("Intento " + (intentos + 1));\n    intentos++;\n}', challenge: 'Solicita una contraseña hasta que coincida con una clave elegida para el ejercicio.' },
+                    { id: 'loop-control', title: 'Bucles anidados y control', theory: 'Un bucle puede contener otro para recorrer combinaciones, como filas y columnas. <code>break</code> termina el bucle y <code>continue</code> salta a la siguiente iteración; úsalos solo cuando mejoren la claridad.', code: 'for (int fila = 1; fila <= 3; fila++) {\n    for (int columna = 1; columna <= 3; columna++) {\n        System.out.print(fila * columna + " ");\n    }\n    System.out.println();\n}', challenge: 'Dibuja con asteriscos un triángulo de altura indicada por el usuario.' }
+                ]
+            },
+            {
+                title: '4. Métodos y organización',
+                icon: 'blocks',
+                lessons: [
+                    { id: 'methods', title: 'Métodos y valores de retorno', theory: 'Los métodos agrupan comportamiento reutilizable. Sus parámetros reciben datos; el tipo de retorno indica qué valor producen. <code>void</code> significa que no devuelven un valor.', code: 'static int sumar(int a, int b) {\n    return a + b;\n}\n\npublic static void main(String[] args) {\n    System.out.println(sumar(3, 4));\n}', challenge: 'Escribe un método que reciba un número y devuelva si es par.' },
+                    { id: 'overloading-scope', title: 'Sobrecarga y ámbito', theory: 'Puedes sobrecargar un método creando varias versiones con el mismo nombre y diferentes parámetros. El ámbito determina dónde existe una variable: una variable local solo está disponible dentro de su bloque.', code: 'static double area(double radio) {\n    return Math.PI * radio * radio;\n}\n\nstatic int area(int lado) {\n    return lado * lado;\n}', challenge: 'Crea métodos sobrecargados para calcular el área de un círculo y de un rectángulo.' },
+                    { id: 'recursion', title: 'Recursividad', theory: 'Un método recursivo se llama a sí mismo. Necesita un caso base que detenga las llamadas y un paso que acerque el problema a ese caso.', code: 'static int factorial(int n) {\n    if (n <= 1) return 1;\n    return n * factorial(n - 1);\n}', challenge: 'Implementa de forma recursiva la suma de los números desde 1 hasta n.' }
+                ]
+            },
+            {
+                title: '5. Arrays y texto',
+                icon: 'list',
+                lessons: [
+                    { id: 'arrays', title: 'Arrays', theory: 'Un array almacena una cantidad fija de elementos del mismo tipo. Sus índices empiezan en cero y su propiedad <code>length</code> indica el tamaño.', code: 'int[] notas = {7, 9, 6};\nint suma = 0;\nfor (int nota : notas) {\n    suma += nota;\n}\ndouble media = (double) suma / notas.length;', challenge: 'Encuentra el valor máximo de un array y calcula la media de sus elementos.' },
+                    { id: 'strings', title: 'String y texto', theory: '<code>String</code> es inmutable: sus operaciones producen nuevas cadenas. Para comparar contenido usa <code>equals</code>, no <code>==</code>. Para construir texto repetidamente, considera <code>StringBuilder</code>.', code: 'String nombre = "Java";\nSystem.out.println(nombre.length());\nSystem.out.println(nombre.equals("Java"));\n\nStringBuilder mensaje = new StringBuilder();\nmensaje.append("Hola ").append(nombre);', challenge: 'Comprueba si una frase es un palíndromo ignorando espacios y mayúsculas.' },
+                    { id: 'multidimensional-arrays', title: 'Matrices', theory: 'Un array bidimensional es un array cuyos elementos son otros arrays. Puedes recorrerlo con dos bucles, uno para filas y otro para columnas.', code: 'int[][] matriz = {\n    {1, 2},\n    {3, 4}\n};\nfor (int fila = 0; fila < matriz.length; fila++) {\n    for (int col = 0; col < matriz[fila].length; col++) {\n        System.out.print(matriz[fila][col] + " ");\n    }\n    System.out.println();\n}', challenge: 'Suma los elementos de cada fila de una matriz de números.' }
+                ]
+            },
+            {
+                title: '6. Orientación a objetos',
+                icon: 'box',
+                lessons: [
+                    { id: 'classes-objects', title: 'Clases y objetos', theory: 'Una clase define el estado y comportamiento de un tipo. Un objeto es una instancia creada a partir de esa clase; sus campos guardan estado y sus métodos definen acciones.', code: 'class Persona {\n    String nombre;\n\n    void saludar() {\n        System.out.println("Hola, soy " + nombre);\n    }\n}\n\nPersona persona = new Persona();\npersona.nombre = "Luz";\npersona.saludar();', challenge: 'Modela una clase Libro con título, autor y un método que muestre sus datos.' },
+                    { id: 'constructors-encapsulation', title: 'Constructores y encapsulación', theory: 'El constructor inicializa un objeto al crearlo. La encapsulación protege el estado usando campos privados y métodos públicos que validan los cambios.', code: 'class Cuenta {\n    private double saldo;\n\n    Cuenta(double saldoInicial) {\n        saldo = saldoInicial;\n    }\n\n    public double getSaldo() {\n        return saldo;\n    }\n}', challenge: 'Completa Cuenta con métodos para depositar y retirar, evitando importes negativos y saldo insuficiente.' },
+                    { id: 'static-final', title: 'static, final y paquetes', theory: '<code>static</code> pertenece a la clase y no a una instancia concreta. <code>final</code> impide reasignar una variable o sobrescribir un método. Los paquetes organizan clases y evitan conflictos de nombres.', code: 'class Conversor {\n    static final double KM_POR_MILLA = 1.60934;\n\n    static double aKilometros(double millas) {\n        return millas * KM_POR_MILLA;\n    }\n}', challenge: 'Crea una clase UtilidadesMatematicas con constantes y métodos estáticos para conversiones sencillas.' }
+                ]
+            },
+            {
+                title: '7. POO: diseño y reutilización',
+                icon: 'git-branch',
+                lessons: [
+                    { id: 'inheritance', title: 'Herencia', theory: 'La herencia expresa una relación «es un». Una subclase hereda los miembros accesibles de su clase base y puede ampliar su comportamiento. Usa <code>super</code> para invocar un constructor o método de la clase padre.', code: 'class Animal {\n    void hacerSonido() {\n        System.out.println("Sonido");\n    }\n}\nclass Perro extends Animal {\n    void moverCola() {\n        System.out.println("Cola en movimiento");\n    }\n}', challenge: 'Crea una clase base Vehiculo y dos subclases con comportamientos propios.' },
+                    { id: 'polymorphism', title: 'Polimorfismo', theory: 'Con polimorfismo, una referencia del tipo base puede apuntar a objetos de distintas subclases. Al sobrescribir un método, Java ejecuta la implementación del objeto real.', code: 'Animal animal = new Perro();\nanimal.hacerSonido();\n\n// En Perro:\n@Override\nvoid hacerSonido() {\n    System.out.println("Guau");\n}', challenge: 'Guarda varios tipos de animales en una lista y llama al mismo método para todos.' },
+                    { id: 'abstract-interfaces', title: 'Clases abstractas e interfaces', theory: 'Una clase abstracta puede compartir estado y código, pero no se instancia directamente. Una interfaz define un contrato que distintas clases pueden implementar.', code: 'interface Imprimible {\n    void imprimir();\n}\n\nclass Informe implements Imprimible {\n    @Override\n    public void imprimir() {\n        System.out.println("Informe");\n    }\n}', challenge: 'Define una interfaz Reproducible e impleméntala en dos tipos de contenido diferentes.' }
+                ]
+            },
+            {
+                title: '8. Errores y colecciones',
+                icon: 'database',
+                lessons: [
+                    { id: 'exceptions', title: 'Excepciones', theory: 'Las excepciones representan situaciones anómalas. Usa <code>try</code>/<code>catch</code> para recuperarte y <code>finally</code> para acciones de limpieza. No captures excepciones sin tratarlas.', code: 'try {\n    int resultado = Integer.parseInt("42");\n    System.out.println(resultado);\n} catch (NumberFormatException error) {\n    System.out.println("El valor no era un número");\n}', challenge: 'Lee un número de texto y muestra un mensaje claro si no se puede convertir.' },
+                    { id: 'generics', title: 'Genéricos', theory: 'Los genéricos permiten parametrizar clases y métodos con tipos, aportando comprobación en tiempo de compilación y evitando conversiones innecesarias. Los tipos genéricos deben ser tipos de referencia, como <code>Integer</code>.', code: 'List<String> nombres = new ArrayList<>();\nnombres.add("Ada");\nString primero = nombres.get(0);', challenge: 'Crea un método genérico que intercambie dos elementos de una lista.' },
+                    { id: 'list-set-map', title: 'List, Set y Map', theory: '<code>List</code> conserva el orden y admite repetidos. <code>Set</code> evita duplicados. <code>Map</code> relaciona claves con valores. Elige la estructura según las operaciones que necesites.', code: 'List<String> lista = new ArrayList<>();\nSet<String> etiquetas = new HashSet<>();\nMap<String, Integer> edades = new HashMap<>();\nedades.put("Ana", 28);', challenge: 'Cuenta la frecuencia de cada palabra de una frase usando un Map.' }
+                ]
+            },
+            {
+                title: '9. Estructuras y algoritmos',
+                icon: 'list-ordered',
+                lessons: [
+                    { id: 'search-sort-complexity', title: 'Búsqueda, ordenación y coste', theory: 'La búsqueda lineal revisa elementos uno por uno; la búsqueda binaria requiere datos ordenados. La notación Big O describe cómo crece el coste al aumentar la entrada; usa las utilidades de <code>Arrays</code> antes de reinventar algoritmos.', code: 'int[] numeros = {5, 2, 8, 1};\nArrays.sort(numeros);\nint posicion = Arrays.binarySearch(numeros, 5);', challenge: 'Ordena una lista de números y busca un valor; explica cuándo sería válida la búsqueda binaria.' },
+                    { id: 'stack-queue-priorityqueue', title: 'Pilas, colas y PriorityQueue', theory: 'Una pila trabaja con LIFO (último en entrar, primero en salir); una cola, con FIFO. <code>PriorityQueue</code> extrae el elemento de mayor prioridad según su orden natural o un comparador.', code: 'Queue<String> tareas = new ArrayDeque<>();\ntareas.add("Leer");\ntareas.add("Practicar");\nSystem.out.println(tareas.remove());\n\nPriorityQueue<Integer> prioridades = new PriorityQueue<>();', challenge: 'Simula una cola de atención y después modifica el programa para atender según prioridad.' },
+                    { id: 'equals-hashcode-comparator', title: 'equals, hashCode y Comparator', theory: 'Si dos objetos son iguales según <code>equals</code>, deben tener el mismo <code>hashCode</code>. Un <code>Comparator</code> define un orden alternativo para ordenar o priorizar objetos propios.', code: 'Comparator<String> porLongitud =\n    Comparator.comparingInt(String::length);\n\nList<String> palabras = new ArrayList<>(\n    List.of("Java", "sol", "programación"));\npalabras.sort(porLongitud);', challenge: 'Crea una clase Producto y ordénala por precio y luego por nombre.' }
+                ]
+            },
+            {
+                title: '10. Archivos y Java moderno',
+                icon: 'file-text',
+                lessons: [
+                    { id: 'file-io', title: 'Lectura y escritura de archivos', theory: 'La API <code>java.nio.file</code> ofrece herramientas para manejar rutas y archivos. <code>Files.readString</code> y <code>Files.writeString</code> simplifican operaciones de texto; controla las excepciones de entrada/salida.', code: 'Path ruta = Path.of("notas.txt");\nFiles.writeString(ruta, "Practicar Java");\nString contenido = Files.readString(ruta);\nSystem.out.println(contenido);', challenge: 'Guarda varias tareas en un archivo de texto y cárgalas cuando vuelva a ejecutarse el programa.' },
+                    { id: 'lambdas-streams', title: 'Lambdas y Streams', theory: 'Las expresiones lambda implementan interfaces funcionales de forma concisa. Los Streams permiten encadenar operaciones como filtrar, transformar y recopilar datos sin modificar la colección original.', code: 'List<Integer> pares = numeros.stream()\n    .filter(n -> n % 2 == 0)\n    .map(n -> n * n)\n    .toList();', challenge: 'Filtra una lista de nombres para quedarte con los que empiezan por una letra dada y conviértelos a mayúsculas.' },
+                    { id: 'optional-records-enums', title: 'Optional, records y enums', theory: '<code>Optional</code> modela un valor que puede faltar. Los <code>enum</code> representan un conjunto cerrado de opciones. Los <code>record</code> son una forma compacta de declarar clases orientadas a datos (Java 16+).', code: 'enum Estado { PENDIENTE, HECHO }\n\nrecord Tarea(String titulo, Estado estado) {}\n\nOptional<Tarea> tarea = Optional.of(\n    new Tarea("Estudiar", Estado.PENDIENTE));', challenge: 'Modela el estado de un pedido con un enum y representa sus datos con un record.' }
+                ]
+            },
+            {
+                title: '11. Calidad y herramientas',
+                icon: 'check-check',
+                lessons: [
+                    { id: 'unit-testing', title: 'Pruebas unitarias', theory: 'Una prueba unitaria verifica una unidad pequeña de comportamiento con entradas y resultados esperados. Las pruebas detectan regresiones y hacen más seguro refactorizar; JUnit es una biblioteca habitual para Java.', code: '@Test\nvoid sumaDosNumeros() {\n    assertEquals(5, Calculadora.sumar(2, 3));\n}', challenge: 'Escribe casos de prueba para una calculadora, incluidos valores límite y entradas no válidas.' },
+                    { id: 'jdbc', title: 'Bases de datos con JDBC', theory: 'JDBC conecta una aplicación Java con bases de datos mediante conexiones, sentencias y resultados. Usa <code>PreparedStatement</code> para parametrizar consultas y cierra recursos con <code>try-with-resources</code>.', code: 'String sql = "SELECT nombre FROM usuarios WHERE id = ?";\ntry (PreparedStatement consulta = conexion.prepareStatement(sql)) {\n    consulta.setInt(1, id);\n    try (ResultSet resultado = consulta.executeQuery()) {\n        if (resultado.next()) {\n            System.out.println(resultado.getString("nombre"));\n        }\n    }\n}', challenge: 'Diseña las operaciones básicas para guardar y consultar tareas usando JDBC y consultas parametrizadas.' },
+                    { id: 'maven-git-debugging', title: 'Maven, Git y depuración', theory: 'Maven organiza dependencias y tareas de construcción mediante <code>pom.xml</code>. Git registra cambios y permite volver a versiones anteriores. El depurador ayuda a inspeccionar variables paso a paso.', code: 'mvn test\nmvn package\n\ngit status\ngit add src/\ngit commit -m "Añade gestión de tareas"', challenge: 'Crea un proyecto Maven, añade una prueba, guárdalo en Git y practica un punto de interrupción.' }
+                ]
+            },
+            {
+                title: '12. Concurrencia y proyecto final',
+                icon: 'workflow',
+                lessons: [
+                    { id: 'threads-executors', title: 'Hilos y ExecutorService', theory: 'La concurrencia permite realizar tareas de forma independiente. Crear y gestionar hilos manualmente es complejo; <code>ExecutorService</code> administra un grupo de trabajadores y sus tareas.', code: 'ExecutorService executor = Executors.newFixedThreadPool(2);\nexecutor.submit(() -> System.out.println("Tarea en ejecución"));\nexecutor.shutdown();', challenge: 'Envía varias tareas independientes a un executor y espera a que terminen correctamente.' },
+                    { id: 'synchronization', title: 'Sincronización y seguridad', theory: 'Si varios hilos modifican el mismo estado, pueden aparecer condiciones de carrera. La sincronización protege secciones críticas; compartir menos estado mutable suele hacer los programas más sencillos y seguros.', code: 'synchronized void incrementar() {\n    contador++;\n}', challenge: 'Analiza una cuenta bancaria compartida entre tareas y evita que dos retiradas simultáneas corrompan el saldo.' },
+                    { id: 'final-project', title: 'Proyecto final: gestor de tareas', theory: 'Integra el curso en una aplicación de consola: separa responsabilidades en clases, valida entradas, usa colecciones, guarda datos en archivos y cubre la lógica principal con pruebas.', code: 'class Tarea {\n    private final String titulo;\n    private boolean completada;\n\n    Tarea(String titulo) {\n        this.titulo = titulo;\n    }\n\n    void completar() {\n        completada = true;\n    }\n}', challenge: 'Construye un gestor de tareas con opciones para listar, añadir, completar y guardar tareas. Añade pruebas y explica cómo ejecutar el proyecto.' }
+                ]
+            }
+        ];
+
+        const lessons = modules.flatMap(module =>
+            module.lessons.map(lesson => ({ ...lesson, module: module.title, icon: module.icon }))
+        );
+        const storageKey = 'java-mastery-completed';
+        const completedLessons = new Set();
+        let currentLessonId = null;
+
+        function restoreProgress() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+                if (Array.isArray(saved)) {
+                    saved.filter(id => lessons.some(lesson => lesson.id === id)).forEach(id => completedLessons.add(id));
+                }
+            } catch (error) {
+                console.error('No se pudo recuperar el progreso guardado.', error);
+            }
+        }
+
+        function saveProgress() {
+            try {
+                localStorage.setItem(storageKey, JSON.stringify([...completedLessons]));
+            } catch (error) {
+                console.error('No se pudo guardar el progreso del curso.', error);
+            }
+        }
+
+        function renderNavigation() {
+            const list = document.getElementById('module-list');
+            const select = document.getElementById('mobile-lesson-select');
+            list.innerHTML = '';
+            select.innerHTML = '<option value="">Selecciona una lección...</option>';
+
+            modules.forEach(module => {
+                const section = document.createElement('section');
+                const heading = document.createElement('h3');
+                heading.className = 'mb-2 flex items-center gap-2 text-sm font-bold text-slate-300';
+                heading.innerHTML = `<i data-lucide="${module.icon}" class="h-4 w-4 text-orange-400"></i>${module.title}`;
+                section.appendChild(heading);
+
+                module.lessons.forEach(lesson => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.id = `nav-${lesson.id}`;
+                    button.className = 'lesson-card w-full rounded-lg px-3 py-2 text-left text-sm text-slate-400 hover:bg-slate-700 hover:text-white';
+                    button.setAttribute('aria-current', 'false');
+                    button.innerHTML = `<span class="mr-2 inline-block w-4 text-center">${completedLessons.has(lesson.id) ? '✓' : '·'}</span>${lesson.title}`;
+                    button.addEventListener('click', () => loadLesson(lesson.id));
+                    section.appendChild(button);
+
+                    const option = document.createElement('option');
+                    option.value = lesson.id;
+                    option.textContent = `${module.title} — ${lesson.title}`;
+                    select.appendChild(option);
+                });
+                list.appendChild(section);
+            });
+
+            select.value = currentLessonId || '';
+            select.onchange = event => {
+                if (event.target.value) loadLesson(event.target.value);
+            };
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function updateProgress() {
+            const percent = Math.round(completedLessons.size / lessons.length * 100);
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+            document.getElementById('progress-text').textContent = `${percent}%`;
+            document.getElementById('progress-count').textContent = `${completedLessons.size} de ${lessons.length} lecciones`;
+            document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow', String(percent));
+        }
+
+        function showWelcome() {
+            currentLessonId = null;
+            document.getElementById('welcome-screen').classList.remove('hidden');
+            document.getElementById('content-area').classList.add('hidden');
+            document.getElementById('mobile-lesson-select').value = '';
+            document.querySelectorAll('.lesson-card').forEach(button => button.setAttribute('aria-current', 'false'));
+        }
+
+        function loadLesson(id) {
+            const lessonIndex = lessons.findIndex(lesson => lesson.id === id);
+            if (lessonIndex < 0) {
+                console.error(`No se encontró la lección "${id}".`);
+                return;
+            }
+
+            const lesson = lessons[lessonIndex];
+            currentLessonId = id;
+            document.getElementById('welcome-screen').classList.add('hidden');
+            const area = document.getElementById('content-area');
+            area.classList.remove('hidden');
+            const isCompleted = completedLessons.has(id);
+            const previousLesson = lessons[lessonIndex - 1];
+            const nextLesson = lessons[lessonIndex + 1];
+
+            area.innerHTML = `
+                <div class="mb-7">
+                    <p class="mb-2 text-sm font-semibold text-orange-400">${lesson.module} · Lección ${lessonIndex + 1} de ${lessons.length}</p>
+                    <div class="flex items-center gap-4">
+                        <span class="rounded-2xl bg-orange-500 p-3 text-white"><i data-lucide="${lesson.icon}"></i></span>
+                        <h1 class="text-3xl font-bold text-white sm:text-4xl">${lesson.title}</h1>
+                    </div>
+                </div>
+                <div class="grid gap-6">
+                    <section class="rounded-3xl border border-slate-700 bg-slate-800/60 p-6">
+                        <h2 class="mb-3 flex items-center gap-2 font-bold text-orange-400"><i data-lucide="book-open" class="h-5 w-5"></i>Conceptos clave</h2>
+                        <p class="text-base leading-relaxed text-slate-300">${lesson.theory}</p>
+                    </section>
+                    <section class="relative">
+                        <span class="absolute -top-3 left-4 bg-[#0f172a] px-2 font-mono text-xs text-slate-400">EJEMPLO.JAVA</span>
+                        <pre class="code-font overflow-x-auto rounded-3xl border border-slate-700 bg-black p-6 text-sm leading-relaxed text-green-300"><code>${lesson.code}</code></pre>
+                    </section>
+                    <section class="rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 p-6">
+                        <h2 class="mb-3 flex items-center gap-2 font-bold text-indigo-300"><i data-lucide="target" class="h-5 w-5"></i>Reto práctico</h2>
+                        <p class="mb-5 leading-relaxed text-slate-200">${lesson.challenge}</p>
+                        <button id="complete-button" type="button" class="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold text-white transition ${isCompleted ? 'bg-green-700 hover:bg-green-600' : 'bg-indigo-600 hover:bg-indigo-500'}">
+                            <i data-lucide="${isCompleted ? 'check' : 'circle-check'}" class="h-5 w-5"></i>${isCompleted ? 'Lección completada' : 'Marcar como completada'}
+                        </button>
+                    </section>
+                    <div class="flex flex-wrap justify-between gap-3">
+                        ${previousLesson ? `<button type="button" data-lesson="${previousLesson.id}" class="lesson-nav inline-flex items-center gap-2 rounded-xl border border-slate-700 px-4 py-3 text-sm text-slate-300 hover:bg-slate-800"><i data-lucide="arrow-left" class="h-4 w-4"></i>Anterior</button>` : '<span></span>'}
+                        ${nextLesson ? `<button type="button" data-lesson="${nextLesson.id}" class="lesson-nav inline-flex items-center gap-2 rounded-xl bg-slate-800 px-4 py-3 text-sm text-white hover:bg-slate-700">Siguiente<i data-lucide="arrow-right" class="h-4 w-4"></i></button>` : ''}
+                    </div>
+                </div>`;
+
+            document.getElementById('complete-button').addEventListener('click', () => toggleComplete(id));
+            area.querySelectorAll('.lesson-nav').forEach(button => {
+                button.addEventListener('click', () => loadLesson(button.dataset.lesson));
+            });
+            document.querySelectorAll('.lesson-card').forEach(button => {
+                button.setAttribute('aria-current', button.id === `nav-${id}` ? 'true' : 'false');
+            });
+            document.getElementById('mobile-lesson-select').value = id;
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function toggleComplete(id) {
+            if (completedLessons.has(id)) {
+                completedLessons.delete(id);
+            } else {
+                completedLessons.add(id);
+            }
+            saveProgress();
+            updateProgress();
+            renderNavigation();
+            loadLesson(id);
+        }
+
+        document.getElementById('start-button').addEventListener('click', () => loadLesson(lessons[0].id));
+        restoreProgress();
+        renderNavigation();
+        updateProgress();
+    </script>
+</body>
+</html>
