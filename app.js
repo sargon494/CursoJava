@@ -1,7 +1,8 @@
 // Renderizado sencillo por hash. El progreso se guarda en localStorage.
 (function () {
   const DATA = window.TEMARIO;
-  const EXTRA = window.CONTENIDO || {};   // enunciados completos y soluciones por unidad
+  const EXTRA = window.CONTENIDO || {};
+  const EXPL = window.EXPLICACION || {};   // pista y "por qué funciona" por ejercicio
   const CLAVE = "curso-java-progreso-v1";
   const app = document.getElementById("app");
   const menu = document.getElementById("menu");
@@ -87,14 +88,20 @@
   }
 
   // Bloque de un ejercicio: enunciado (completo si existe), casilla y solución desplegable.
-  function bloqueEjercicio(id, indice, titulo, textoBase, clave, extra) {
+  function bloqueEjercicio(id, indice, titulo, textoBase, clave, extra, ayuda) {
     const hecho = marcado(clave);
     const enunciado = (extra && extra.enunciado) || textoBase;
+    const pista = ayuda && ayuda.pista
+      ? `<details class="pista"><summary>Pista</summary><p>${esc(ayuda.pista)}</p></details>`
+      : "";
     const solucion = extra && extra.solucion
       ? `<details class="solucion"><summary>Ver solución y explicación</summary>
           <pre><code>${esc(extra.solucion)}</code></pre>
           ${extra.explicacion ? `<div class="explicacion-solucion"><strong>Cómo entenderla</strong><p>${esc(extra.explicacion)}</p></div>` : ""}
         </details>`
+      : "";
+    const razon = ayuda && ayuda.razonamiento && ayuda.razonamiento.length
+      ? `<details class="razonamiento"><summary>Por qué funciona</summary>${ayuda.razonamiento.map(p => `<p>${esc(p)}</p>`).join("")}</details>`
       : "";
     return `<li class="ejercicio ${hecho ? "hecho" : ""}">
       <input type="checkbox" id="${esc(id)}-${indice}" data-clave="${esc(clave)}" ${hecho ? "checked" : ""}>
@@ -103,7 +110,9 @@
           <div class="titulo-ej">${indice + 1}. ${esc(titulo)}</div>
           <div class="texto-ej">${esc(enunciado)}</div>
         </label>
+        ${pista}
         ${solucion}
+        ${razon}
       </div>
     </li>`;
   }
@@ -215,7 +224,8 @@
              e.titulo,
              e.texto,
              ejUd(u) + i,
-             extra[i]
+             extra[i],
+             (EXPL[u.id] || [])[i]
            )
          ).join("")}</ol>`
       : `<h2>Ejercicios</h2><p>Esta unidad no tiene ejercicios propios en el temario; practica con los de la unidad 12 y los exámenes.</p>`;
@@ -243,7 +253,7 @@
       if (!ex) return vistaExamenes();
       const solEx = (EXTRA[ex.id] || {}).ejercicios || [];
       const lista = ex.ejercicios.map((e, i) =>
-        bloqueEjercicio(`ex-${ex.id}`, i, e.titulo, e.texto, ejEx(ex) + i, solEx[i] || null)
+        bloqueEjercicio(`ex-${ex.id}`, i, e.titulo, e.texto, ejEx(ex) + i, solEx[i] || null, (EXPL[ex.id] || [])[i])
       ).join("");
       return `
         <p class="etiqueta">Examen</p>

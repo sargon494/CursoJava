@@ -271,3 +271,14 @@ code { font-family: var(--mono); font-size: .9em; }
   .seccion-cabecera { align-items: start; }
   .resultado-quiz { align-items: start; flex-direction: column; }
 }
+
+/* Pista, solución y por qué funciona, por ejercicio */
+.pista, .razonamiento { margin-top: .6rem; }
+.pista summary, .razonamiento summary {
+  cursor: pointer; font-weight: 600; font-size: .92rem; list-style: none; color: var(--tinta-suave);
+}
+.pista summary::-webkit-details-marker, .razonamiento summary::-webkit-details-marker { display: none; }
+.pista summary::before, .razonamiento summary::before { content: "▸ "; color: var(--acento); }
+.pista[open] summary::before, .razonamiento[open] summary::before { content: "▾ "; }
+.pista p { margin: .4rem 0 0; color: var(--tinta-suave); font-size: .95rem; }
+.razonamiento p { margin: .5rem 0 0; font-size: .95rem; }
