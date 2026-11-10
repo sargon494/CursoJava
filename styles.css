@@ -1,13 +1,17 @@
-/* Paleta cálida de papel y tinta; acento óxido. Sin gradientes ni neones. */
+/* Paleta de lectura prolongada: papel gris verdoso apagado, tinta carbón (no negro puro),
+   acento acero. Contraste suficiente (WCAG AA) sin deslumbrar. Sin gradientes ni neones. */
 :root {
-  --papel: #f4f6f8;
-  --papel-2: #e9edf2;
-  --tinta: #18222e;
-  --tinta-suave: #5a6778;
-  --linea: #d3dbe4;
-  --acento: #2456c7;
-  --acento-suave: #dbe6fb;
-  --ok: #1f7a4d;
+  color-scheme: light dark;
+  --papel: #e6e9e5;
+  --papel-2: #dce1dc;
+  --tinta: #2b3335;
+  --tinta-suave: #5b6667;
+  --linea: #c5cdc8;
+  --acento: #3e5f9e;
+  --acento-suave: #d3ddec;
+  --ok: #3b7a57;
+  --codigo-fondo: #323d41;
+  --codigo-texto: #dfe5e1;
   --radio: 8px;
   --serif: "IBM Plex Sans", system-ui, sans-serif;
   --sans: "IBM Plex Sans", system-ui, sans-serif;
@@ -16,14 +20,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema="claro"]) {
-    --papel: #111820;
-    --papel-2: #18212b;
-    --tinta: #e6ebf2;
-    --tinta-suave: #9aa6b5;
-    --linea: #2a3543;
-    --acento: #8db2ff;
-    --acento-suave: #1d2c46;
-    --ok: #7fcf9c;
+    --papel: #1b2023;
+    --papel-2: #222a2e;
+    --tinta: #d2d8d4;
+    --tinta-suave: #98a3a0;
+    --linea: #343e42;
+    --acento: #9db8e6;
+    --acento-suave: #27344a;
+    --ok: #8fc7a2;
+    --codigo-fondo: #12161a;
+    --codigo-texto: #c9d1cc;
   }
 }
 
@@ -99,7 +105,7 @@ ul.teoria { padding-left: 1.2rem; }
 ul.teoria li { margin-bottom: .5rem; }
 
 pre {
-  background: var(--tinta); color: var(--papel); font-family: var(--mono); font-size: .88rem;
+  background: var(--codigo-fondo); color: var(--codigo-texto); font-family: var(--mono); font-size: .88rem;
   padding: 1rem 1.2rem; border-radius: var(--radio); overflow-x: auto; line-height: 1.5;
 }
 .dark-code { }
