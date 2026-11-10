@@ -127,8 +127,12 @@ code { font-family: var(--mono); font-size: .9em; }
   width: 1.2rem; height: 1.2rem; margin-top: .2rem; accent-color: var(--ok); cursor: pointer;
 }
 .ejercicio label { cursor: pointer; }
-.titulo-ej { font-weight: 600; }
-.texto-ej { color: var(--tinta-suave); font-size: .95rem; margin-top: .15rem; }
+.titulo-ej { font-weight: 600; font-size: 1.08rem; color: var(--tinta); margin-bottom: .25rem; }
+/* El enunciado es lo que más se lee: tinta plena, más tamaño e interlineado, y línea corta */
+.texto-ej {
+  color: var(--tinta); font-size: 1.02rem; line-height: 1.7; margin-top: .2rem;
+  max-width: 68ch;
+}
 .puntos { font-size: .85rem; color: var(--acento); font-weight: 600; margin-left: .4rem; }
 
 .nav-unidad { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--linea); }
