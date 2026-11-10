@@ -1,29 +1,29 @@
 /* Paleta cálida de papel y tinta; acento óxido. Sin gradientes ni neones. */
 :root {
-  --papel: #f6f1e7;
-  --papel-2: #efe7d6;
-  --tinta: #22201c;
-  --tinta-suave: #5b5548;
-  --linea: #d8cdb6;
-  --acento: #b5501f;
-  --acento-suave: #f0d9c8;
-  --ok: #3d6b3a;
-  --radio: 10px;
-  --serif: "Fraunces", Georgia, serif;
-  --sans: "Source Sans 3", system-ui, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --papel: #f4f6f8;
+  --papel-2: #e9edf2;
+  --tinta: #18222e;
+  --tinta-suave: #5a6778;
+  --linea: #d3dbe4;
+  --acento: #2456c7;
+  --acento-suave: #dbe6fb;
+  --ok: #1f7a4d;
+  --radio: 8px;
+  --serif: "IBM Plex Sans", system-ui, sans-serif;
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema="claro"]) {
-    --papel: #1d1b17;
-    --papel-2: #26231d;
-    --tinta: #efe9dc;
-    --tinta-suave: #b4ab98;
-    --linea: #3d3930;
-    --acento: #e08a5c;
-    --acento-suave: #3a2a20;
-    --ok: #8fc48a;
+    --papel: #111820;
+    --papel-2: #18212b;
+    --tinta: #e6ebf2;
+    --tinta-suave: #9aa6b5;
+    --linea: #2a3543;
+    --acento: #8db2ff;
+    --acento-suave: #1d2c46;
+    --ok: #7fcf9c;
   }
 }
 
@@ -34,8 +34,8 @@ body {
   background: var(--papel);
   color: var(--tinta);
   font-family: var(--sans);
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: 1.02rem;
+  line-height: 1.65;
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -72,11 +72,11 @@ a { color: var(--acento); text-underline-offset: 3px; }
 .principal:focus { outline: none; }
 
 h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
-h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin: 0 0 .4rem; font-weight: 700; }
+h1 { font-size: clamp(1.9rem, 3.6vw, 2.5rem); margin: 0 0 .4rem; font-weight: 650; letter-spacing: -.01em; }
 h2 { font-size: 1.55rem; margin: 2.2rem 0 .8rem; font-weight: 600; }
 h3 { font-size: 1.15rem; margin: 1.4rem 0 .4rem; }
 .subtitulo { color: var(--tinta-suave); margin: 0 0 2rem; font-size: 1.1rem; }
-.etiqueta { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--acento); font-weight: 600; }
+.etiqueta { font-size: .9rem; color: var(--tinta-suave); font-weight: 500; margin: 0 0 .3rem; }
 
 .progreso-global { margin: 1.5rem 0 2rem; }
 .barra-fondo { height: 10px; background: var(--linea); border-radius: 99px; overflow: hidden; }
