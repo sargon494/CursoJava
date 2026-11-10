@@ -2,14 +2,16 @@
    acento acero. Contraste suficiente (WCAG AA) sin deslumbrar. Sin gradientes ni neones. */
 :root {
   color-scheme: light dark;
-  --papel: #e6e9e5;
-  --papel-2: #dce1dc;
-  --tinta: #2b3335;
-  --tinta-suave: #5b6667;
-  --linea: #c5cdc8;
-  --acento: #3e5f9e;
-  --acento-suave: #d3ddec;
-  --ok: #3b7a57;
+  --papel: #e9ece8;
+  --papel-2: #f5f6f3;
+  --tinta: #1d272b;
+  --tinta-suave: #4f5d62;
+  --linea: #c3ccc7;
+  --acento: #2d5ba8;
+  --acento-suave: #d6e2f5;
+  --ok: #2f7a50;
+  --aviso: #8a5a14;
+  --aviso-suave: #f3e6cf;
   --codigo-fondo: #323d41;
   --codigo-texto: #dfe5e1;
   --radio: 8px;
@@ -20,14 +22,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema="claro"]) {
-    --papel: #1b2023;
-    --papel-2: #222a2e;
-    --tinta: #d2d8d4;
-    --tinta-suave: #98a3a0;
-    --linea: #343e42;
-    --acento: #9db8e6;
-    --acento-suave: #27344a;
-    --ok: #8fc7a2;
+    --papel: #161c20;
+    --papel-2: #20282d;
+    --tinta: #e4e9e6;
+    --tinta-suave: #a4afab;
+    --linea: #33404a;
+    --acento: #a9c4f0;
+    --acento-suave: #24344c;
+    --ok: #8fd0a4;
+    --aviso: #e7b96a;
+    --aviso-suave: #3a2f1c;
     --codigo-fondo: #12161a;
     --codigo-texto: #c9d1cc;
   }
@@ -82,7 +86,7 @@ h1 { font-size: clamp(1.9rem, 3.6vw, 2.5rem); margin: 0 0 .4rem; font-weight: 65
 h2 { font-size: 1.55rem; margin: 2.2rem 0 .8rem; font-weight: 600; }
 h3 { font-size: 1.15rem; margin: 1.4rem 0 .4rem; }
 .subtitulo { color: var(--tinta-suave); margin: 0 0 2rem; font-size: 1.1rem; }
-.etiqueta { font-size: .9rem; color: var(--tinta-suave); font-weight: 500; margin: 0 0 .3rem; }
+.etiqueta { font-size: .9rem; color: var(--acento); font-weight: 600; margin: 0 0 .3rem; }
 
 .progreso-global { margin: 1.5rem 0 2rem; }
 .barra-fondo { height: 10px; background: var(--linea); border-radius: 99px; overflow: hidden; }
@@ -309,3 +313,19 @@ code { font-family: var(--mono); font-size: .9em; }
   }
   #menu a { display: inline-flex; }
 }
+
+/* Jerarquía: secciones con marca, pistas destacadas y tarjetas que se separan del fondo */
+h2 { padding-bottom: .35rem; border-bottom: 1px solid var(--linea); }
+.tarjeta, .pregunta, .bloque-ref, .nota-practica { box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.pista {
+  background: var(--acento-suave); border-left: 3px solid var(--acento);
+  border-radius: 6px; padding: .5rem .8rem;
+}
+.pista summary, .pista[open] summary { color: var(--acento); }
+.razonamiento {
+  background: var(--papel-2); border-left: 3px solid var(--ok);
+  border-radius: 6px; padding: .5rem .8rem .6rem;
+}
+.razonamiento summary { color: var(--ok); }
+.solucion summary { color: var(--acento); }
+.ejercicio.hecho { background: var(--papel-2); }
