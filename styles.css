@@ -282,3 +282,24 @@ code { font-family: var(--mono); font-size: .9em; }
 .pista[open] summary::before, .razonamiento[open] summary::before { content: "▾ "; }
 .pista p { margin: .4rem 0 0; color: var(--tinta-suave); font-size: .95rem; }
 .razonamiento p { margin: .5rem 0 0; font-size: .95rem; }
+
+/* Micro-interacciones y accesibilidad (taste-skill / ui-ux-pro-max):
+   las tarjetas enlazadas se elevan 2px, los botones responden al pulsar,
+   los controles se pueden señalar y tocar, y todo respeta reduced-motion. */
+#menu a, .extras a, .tarjeta, .boton, .quiz-op, .pista summary, .razonamiento summary, .solucion summary {
+  cursor: pointer;
+  transition: transform .2s ease, background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+.tarjeta:hover { transform: translateY(-2px); }
+.boton:active, .quiz-op:not(:disabled):active { transform: translateY(1px); }
+.quiz-op:disabled { cursor: default; }
+
+/* Objetivos táctiles de al menos 44px en móvil */
+@media (max-width: 800px) {
+  #menu a, .extras a, .boton, .quiz-op, .pista summary, .razonamiento summary, .solucion summary, .nav-unidad a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  #menu a { display: inline-flex; }
+}
